@@ -2,7 +2,21 @@ def book_import(book_name):
     try:
         with open('lessons/books/' + book_name + '.txt', 'r') as file:
             content = file.readlines()
+            return content
 
+    except FileNotFoundError:
+        print(f"file lessons/books/{book_name}.txt not found.")
+
+
+def book_content_checkout(content):
+    for line in content:
+        if 'START OF THE PROJECT GUTENBERG' in line:
+            return True
+
+
+def book_text_cleaning(content):
+    content = content
+    if book_content_checkout(content) is True:
         start_index = next((i for i, line in enumerate(content) if 'START OF THE PROJECT GUTENBERG' in line), 0)
         start_index = next(i + start_index + 1 for i, line in enumerate(content[start_index:])
                            if 'content' in line.lower())
@@ -11,7 +25,6 @@ def book_import(book_name):
         end_index = next((i for i, line in enumerate(content) if
                           'END OF THE PROJECT GUTENBERG EBOOK' in line), len(content))
         end_index = next(end_index - i for i, line in enumerate(reversed(content[:end_index])) if line.strip())
-
         content = content[start_index:end_index]
         content = [line.strip() for line in content]
 
@@ -29,8 +42,10 @@ def book_import(book_name):
 
         return content
 
-    except FileNotFoundError:
-        print(f"file lessons/books/{book_name}.txt not found.")
+    else:
+        content = [line.strip() for line in content]
+        content = [[], content]
+        return content
 
 
 def words_separated(text):

@@ -91,7 +91,7 @@ class Reading:
             number += 1
 
     def save_book_arrangement(self, book_name):
-        file_name = 'config/' + book_name + '.json'
+        file_name = 'lessons/books/' + book_name + '.json'
         if os.path.exists(file_name):
             with open(file_name, 'r') as file:
                 self.book = json.load(file)
@@ -102,5 +102,12 @@ class Reading:
             return self.book
         else:
             self.label_calculator()
-            with open('config/' + book_name + '.json', 'w') as file:
+            with open(file_name, 'w') as file:
                 json.dump(self.book, file)
+            with open(file_name, 'r') as file:
+                self.book = json.load(file)
+            book2 = {}
+            for key in list(self.book.keys()):
+                book2[key] = self.book[key]
+            self.book = book2
+            return self.book

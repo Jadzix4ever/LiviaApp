@@ -64,12 +64,12 @@ class ListBox:
 
     def list_box(self):
         max_length = 38
-        self.listbox = tk.Listbox(width=max_length - 8, height=5)
+        self.listbox = tk.Listbox(width=max_length - 8, height=20)
         self.listbox.pack(anchor="ne", padx=10, pady=10)
 
         if self.courses_list:
             for course in self.courses_list:
-                truncated_course = textwrap.shorten(course, width=max_length, placeholder="...")
+                truncated_course = textwrap.shorten('# ' + course, width=max_length, placeholder="...")
                 self.listbox.insert(tk.END, truncated_course)
 
         self.listbox.bind("<ButtonRelease-1>", self.listbox_select)

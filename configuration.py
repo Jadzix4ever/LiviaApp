@@ -50,7 +50,7 @@ def import_file_to_dictionary(file_path: str) -> dict:
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.readlines()
 
-        if '#separator' in content[0] and '#html' in content[1]:
+        if len(content) > 1 and '#separator' in content[0] and '#html' in content[1]:
             for i, line in enumerate(content):
                 if (i + 1) % 5 == 0:
                     key = line.strip().strip('"\t"')

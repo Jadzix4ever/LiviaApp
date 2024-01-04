@@ -20,12 +20,13 @@ class CourseCreate:
     def create_file(self):
         self.course_name = self.entry.get()
         with open("config/courses_list", 'r') as file:
-            content = file.read()
-        if self.course_name.lower() in content.lower():
-            self.label.config(text='In the base already exist.')
-            self.entry.destroy()
-            self.button.config(text='Close', command=self.top.destroy)
-            return
+            courses = file.readlines()
+        for course in courses:
+            if self.course_name.lower() == course.lower():
+                self.label.config(text='In the base already exist.')
+                self.entry.destroy()
+                self.button.config(text='Close', command=self.top.destroy)
+                return
 
         self.file_path = os.path.join('lessons', self.course_name + '.txt')
 
