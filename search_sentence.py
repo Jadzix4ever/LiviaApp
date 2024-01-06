@@ -3,7 +3,7 @@ import os
 import re
 from configuration import save_word_list
 from ui import center_window, create_label, create_button
-# from OpenAI import sentence_translate_generator
+from open_ai import book_sentence_translation
 
 
 class AddSentence:
@@ -91,6 +91,6 @@ class AddSentence:
         # print('author: ' + author)
         # print('sentence: ' + sentence)
         # print('word: ' + self.current_word)
-        # self.dictionary[self.current_word][2] = sentence_translate_generator(language, book_name, author, sentence,
+        # self.dictionary[self.current_word][2] = book_sentence_translation(language, book_name, author, sentence,
         #                                                                      self.current_word)
         # self.sentence_label_translate.config(text=str(self.dictionary[self.current_word][2]))

@@ -69,7 +69,7 @@ class ListBox:
 
         if self.courses_list:
             for course in self.courses_list:
-                truncated_course = textwrap.shorten('# ' + course, width=max_length, placeholder="...")
+                truncated_course = textwrap.shorten(course, width=max_length, placeholder="...")
                 self.listbox.insert(tk.END, truncated_course)
 
         self.listbox.bind("<ButtonRelease-1>", self.listbox_select)

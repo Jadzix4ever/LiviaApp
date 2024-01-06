@@ -77,7 +77,6 @@ class LiviaApp:
 
     def new_word_input(self):
         FlashcardsInputDialog(self.master, self.dictionary, self.file_path)
-        save_word_list(self.file_path, self.dictionary)
 
     def start_learning(self):
         if self.dictionary:
@@ -95,7 +94,10 @@ class LiviaApp:
             return
         book_content = book_text_cleaning(book_content)
         if book_content:
-            Reading(self.master, self.book_name, book_content, self.dictionary, self.file_path)
+            self.master.withdraw()
+            dialog = Reading(self.master, self.book_name, book_content, self.dictionary, self.file_path)
+            self.master.wait_window(dialog.top)
+            self.master.deiconify()
 
     def import_from_url(self):
         RequestsWindow(self.master)

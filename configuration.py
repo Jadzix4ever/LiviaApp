@@ -56,15 +56,21 @@ def import_file_to_dictionary(file_path: str) -> dict:
                     key = line.strip().strip('"\t"')
                     sentence = BeautifulSoup(content[i + 2], 'html.parser')
                     sentence = sentence.div.string
-                    value = [content[i - 2].strip().strip('"'), sentence]
+                    if sentence is None:
+                        sentence = 'None'
+                    value = [content[i - 2].strip().strip('"'), sentence, 'None']
                     dictionary[key] = value
+            save_word_list(file_path, dictionary)
 
         elif content:
             for line in content:
                 if ' : ' in line:
-                    parts = line.strip().split(' : ')
+                    parts = line.split(' : ')
                     key = parts[0]
-                    value = [parts[1], parts[2]]
+                    if len(parts) < 4:
+                        parts.append('None')
+                    parts[3] = parts[3].replace('\n', '')
+                    value = [parts[1], parts[2], parts[3]]
                     dictionary[key] = value
 
         else:
@@ -119,7 +125,7 @@ def save_to_config_file(file_path):
 def save_word_list(file_path: str, dictionary: dict):
     formatted_text = ""
     for key, value in dictionary.items():
-        formatted_text += f'{key} : {value[0]} : {value[1]}{'\n'}'
+        formatted_text += f'{key} : {value[0]} : {value[1]} : {value[2]}\n'
 
     with open(file_path, "w") as file:
         file.write('###LiviaApp###\n')
@@ -149,3 +155,54 @@ def is_good_location(file_path):
         return False
     else:
         return True
+
+
+def check_generated_words(generated: str) -> list:
+    if 'lemmatizated' in generated:
+        words = generated.split('\n')
+        for item in words:
+            if item == '':
+                index = words.index(item)
+                del words[index]
+        print(words)
+        index = 0
+        question_word = words[0]
+        answer_word = words[1]
+        if len(words) > 2:
+            words[2] = words[2].replace('translated word: ', '')
+            answer_word = answer_word + ', ' + words[2]
+            if len(words) > 3:
+                words[3] = words[2].replace('translated word: ', '')
+                answer_word = answer_word + ', ' + words[3]
+                print('To jest to:', answer_word)
+
+        for i, item in enumerate(question_word):
+            if ':' in item:
+                index = i+1
+
+        question_word = question_word[index:].strip()
+        print(question_word)
+
+        for i, item in enumerate(answer_word):
+            if ':' in item:
+                index = i+1
+
+        answer_word = answer_word[index:].strip()
+        print(answer_word)
+
+    else:
+        words = generated.split(':')
+        question_word = words[0].strip()
+        answer_word = words[1].strip()
+        print(question_word)
+        print(answer_word)
+
+    if ',' in answer_word:
+        check_same_words = answer_word.split(', ')
+        check_same_words = list(dict.fromkeys(check_same_words))
+        answer_word = ', '.join(check_same_words)
+        print(answer_word)
+
+    words = [question_word, answer_word]
+    return words
+

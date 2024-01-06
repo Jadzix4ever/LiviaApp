@@ -18,7 +18,8 @@ class Reading:
 
         center_window(self.top, 800, 600)
 
-        self.save_book_arrangement(book_name)
+        self.book_name = book_name
+        self.save_book_arrangement(self.book_name)
         self.dictionary = dictionary
         self.file_path = file_path
 
@@ -87,7 +88,8 @@ class Reading:
             label = create_label(self.top, pairs[number][0], 'Arial, 14', None, 'place',
                                  {'x': word[1], 'y': word[2]})
             label.bind("<Button-1>", lambda event, question=pairs[number][0], sentence=pairs[number][1]:
-                       FlashcardsInputDialog(self.top, self.dictionary, self.file_path, question, sentence, pairs))
+                       FlashcardsInputDialog(self.top, self.dictionary, self.file_path, question,
+                                             sentence, pairs, self.book_name))
             number += 1
 
     def save_book_arrangement(self, book_name):
