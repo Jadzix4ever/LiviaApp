@@ -161,3 +161,7 @@ cython_debug/
 
 # Privat files
 config/Your_API_KEY.txt
+
+# System files
+.DS_Store
+.idea/
