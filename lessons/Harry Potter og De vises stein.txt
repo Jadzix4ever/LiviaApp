@@ -1,0 +1,124 @@
+###LiviaApp###
+en innblanding (n)[sound:innblanding - zaangażowanie.ogg] : zaangażowanie : De var de siste en skulle vente seg innblandet i noe som helst merkelig eller mystisk. : None
+helst (adv) - hva som helst ...[sound:helst - cokolwiek.ogg] : cokolwiek (hvor - gdziekolwiek; når - kiedykolwiek; hvem - ktokolwiek) : De var de siste en skulle vente seg innblandet i noe som helst merkelig eller mystisk. : None
+merkelig (adj); rar [sound:merkelig - dziwny, osobliwy.ogg] : dziwny, osobliwy : De var de siste en skulle vente seg innblandet i noe som helst merkelig eller mystisk. : None
+et vrøvl (n)[sound:vrøvl - bzdury.ogg] : bzdury : Den slags vrøvl holdt de seg for gode til. : None
+heldigvis (adv)[sound:heldigvis - na szczęście.ogg] : na szczęście / eng. fortunately : Herr og fru Dumling i Hekkveien 4 var heldigvis fullstending normale, takk. : None
+tykk (adj)[sound:tykk, tjukk - gruby.ogg] : gruby, gęsty : Det var en stor, tykk mann, nesten uten hals, men til gjengjeld med en diger bart. : None
+til gjengjeld[sound:til gjengjeld - za to.ogg] : za to : Det var en stor, tykk mann, nesten uten hals, men til gjengjeld med en diger bart. : None
+diger (adj)[sound:diger - olbrzymi.ogg] : olbrzymi : Det var en stor, tykk mann, nesten uten hals, men til gjengjeld med en diger bart. : None
+en bart (n)[sound:bart - wąsy.ogg] : wąsy : Det var en stor, tykk mann, nesten uten hals, men til gjengjeld med en diger bart. : None
+tynn (adj)[sound:tynn - chudy, cienki.ogg] : chudy, cienki : Fru Dumling var tynn og blonde og hadde nesten dobbelt så lang hals som folk flest. : None
+en nytte (n)[sound:nytte - korzyść.ogg] : korzyść : Den hadde hun stor nytte av, så mye som hun stakk den over hagehekken og spionerte på naboene. : None
+en hagehekk (n)[sound:hage - ogród.ogg][sound:hekk - żywopłot, płotek (w sporcie).ogg] : żywopłot : Den hadde hun stor nytte av, så mye som hun stakk den over hagehekken og spionerte på naboene. : None
+å spionere (v)[sound:spionere - szpiegować, podglądać.ogg] : szpiegować, podglądać : Den hadde hun stor nytte av, så mye som hun stakk den over hagehekken og spionerte på naboene. : None
+en/et mening[sound:mening - zdanie, pogląd.ogg] : zdanie (nt), pogląd (m) : Herr og fru Dumling hadde en sønn, en liten gutt som het Dudleif, som etter deres mening var verdens aller nudeligste. : None
+nydelig (adj)[sound:nydelig - wspaniały, uroczy.ogg] : wspaniały, uroczy : Herr og fru Dumling hadde en sønn, en liten gutt som het Dudleif, som etter deres mening var verdens aller nudeligste. : None
+en hemmelighet (n)[sound:hemmelighet - tajemnica.ogg] : tajemnica : De hadde til og med en hemmelighet, og det de var aller reddest for, var at noen skulle oppdage den. : None
+redd (adj)[sound:redd - przestraszony.ogg] : przestraszony : De hadde til og med en hemmelighet, og det de var aller reddest for, var at noen skulle oppdage den. : None
+å oppdage (v)[sound:oppdage - odkrywać.ogg] : odkrywać : De hadde til og med en hemmelighet, og det de var aller reddest for, var at noen skulle oppdage den. : None
+å overleve (v)[sound:overleve - przeżyć.ogg] : przeżyć, przetrwać : De trodde aldri de kunne overleve det om noen fikk vite om Potterne. : None
+heller (adv)[sound:heller - chętniej.ogg] : chętniej : Fru Dumling lot heller som om hun ikke hadde noen søster, for søsteren og den noksagten til mann hun hadde, var så u-Dumlingisk som det gikk an å bli. : None
+å fryse[sound:fryse - zamrażać, marznąć.ogg] : zamrażać, marznąć : Dumlingene frøs op ryggen når de tenkte på hva naboene ville si, om Potter-familien noensinne skulle dukke opp i Hekkveien. : None
+noensinne (adv)[sound:noensinne - kiedykolwiek.ogg] : kiedykolwiek : Dumlingene frøs op ryggen når de tenkte på hva naboene ville si, om Potter-familien noensinne skulle dukke opp i Hekkveien. : None
+dukke opp[sound:dukke - uchylać się, zanurzać się, pojawiać się.ogg] : pojawiać się : Dumlingene frøs op ryggen når de tenkte på hva naboene ville si, om Potter-familien noensinne skulle dukke opp i Hekkveien. : None
+også, òg[sound:også - również, także.ogg][sound:òg - również.ogg] : również : Dumlingene visste at Potterne hadde en liten gutt, de òg, men de hadde aldri sett ham. : None
+sånn (adj)(adv)[sound:sånn - taki, tak, w taki sposób.ogg] : taki; tak, w taki sposób (np. zrób to w taki sposób) : Neimen om de ville at Dudleif skulle omgås en sånn en. : None
+en sky (n)[sound:sky - chmura.ogg] : chmura : Da herr og fru Dumling våknet den grå, overskyete tirsdagen denne historien begynner, var det ingenting ved skyene utenfor som tydet på at det snart skulle begynne å skje merkelige og mystiske ting, og det over hele landet. : None
+tyde på (v)[sound:tyde - interpretować; wskazywać na.ogg] : wskazywać na : Da herr og fru Dumling våknet den grå, overskyete tirsdagen denne historien begynner, var det ingenting ved skyene utenfor som tydet på at det snart skulle begynne å skje merkelige og mystiske ting, og det over hele landet. : None
+å skje (v)[sound:skje - stać się.ogg] : stać się : Da herr og fru Dumling våknet den grå, overskyete tirsdagen denne historien begynner, var det ingenting ved skyene utenfor som tydet på at det snart skulle begynne å skje merkelige og mystiske ting, og det over hele landet. : None
+å nynne (v)[sound:nynne - nucić.ogg] : nucić : Herr Dumling nunnet mens han valgte seg ut sitt kjedeligste slips til en ny dag på jobben, og fru Dumling kaklet fornøyd mens hun stappet en vrælende Dudleif opp i barnstolen. : None
+kjedelig (adj)[sound:kjedelig - nudny.ogg] : nudny : Herr Dumling nunnet mens han valgte seg ut sitt kjedeligste slips til en ny dag på jobben, og fru Dumling kaklet fornøyd mens hun stappet en vrælende Dudleif opp i barnstolen. : None
+et slips (n)[sound:slips - krawat.ogg] : krawat : Herr Dumling nunnet mens han valgte seg ut sitt kjedeligste slips til en ny dag på jobben, og fru Dumling kaklet fornøyd mens hun stappet en vrælende Dudleif opp i barnstolen. : None
+å kakle (v)[sound:kakle - gdakać, trajkotać.ogg] : gdakać, trajkotać : Herr Dumling nunnet mens han valgte seg ut sitt kjedeligste slips til en ny dag på jobben, og fru Dumling kaklet fornøyd mens hun stappet en vrælende Dudleif opp i barnstolen. : None
+å stappe (v)[sound:stappe - wpychać.ogg] : wpychać : Herr Dumling nunnet mens han valgte seg ut sitt kjedeligste slips til en ny dag på jobben, og fru Dumling kaklet fornøyd mens hun stappet en vrælende Dudleif opp i barnstolen. : None
+å vræle (v)[sound:vræle - jęczeć.ogg] : jęczeć : Herr Dumling nunnet mens han valgte seg ut sitt kjedeligste slips til en ny dag på jobben, og fru Dumling kaklet fornøyd mens hun stappet en vrælende Dudleif opp i barnstolen. : None
+å merke (v)[sound:merke - oznaczać, zauważyć.ogg] : oznaczać, zauważać : Ingen av dem la merke til at en stor kattugle flakset forbi vinduet. : None
+en kattugle (n) : puszczyk : Ingen av dem la merke til at en stor kattugle flakset forbi vinduet. : None
+å flakse (v)[sound:flakse - łopotać skrzydłami.ogg] : łopotać skrzydłami : Ingen av dem la merke til at en stor kattugle flakset forbi vinduet. : None
+forbi (adv)[sound:forbi - obok.ogg] : obok; za nami, zakończony : Ingen av dem la merke til at en stor kattugle flakset forbi vinduet. : None
+å gripe (v)[sound:gripe - chwytać, łapać.ogg] : chwytać, łapać : Klokka halv ni grep herr Dumling dokumentmappa, susset fru Dumling på kinnet og prøvde å gi Dudleif en avskjedssuss. : None
+en mappe (n)[sound:mappe - teczka.ogg] : teczka : Klokka halv ni grep herr Dumling dokumentmappa, susset fru Dumling på kinnet og prøvde å gi Dudleif en avskjedssuss. : None
+et kinn (n)[sound:kinn - policzek.ogg] : policzek : Klokka halv ni grep herr Dumling dokumentmappa, susset fru Dumling på kinnet og prøvde å gi Dudleif en avskjedssuss. : None
+en avskjed (n)[sound:avskjed - pożegnanie.ogg] : pożegnanie : Klokka halv ni grep herr Dumling dokumentmappa, susset fru Dumling på kinnet og prøvde å gi Dudleif en avskjedssuss. : None
+å slå (v)[sound:slå - uderzać.ogg] : uderzać, stukać (pokonywać, nalewać, szybko poruszać...) : Den traff ikke, for Dudleif ville heller slå seg vrang og slenge all cornflakesen i veggen. : None
+vrang (adj)[sound:vrang - uparty.ogg] : uparty : Den traff ikke, for Dudleif ville heller slå seg vrang og slenge all cornflakesen i veggen. : None
+å slenge (v)[sound:slenge - wyrzucać, rzucać.ogg] : wyrzucać, rzucać : Den traff ikke, for Dudleif ville heller slå seg vrang og slenge all cornflakesen i veggen. : None
+å klukke (v)[sound:klukke - gdakać, szmerać.ogg] : gdakać, szmerać : ""Den lille rakkeren"", klukket herr Dumling. : None
+å rygge (v)[sound:rygge - cofać.ogg] : cofać : Så gikk han ut, satte seg i bilen og rygget ut av innkjørselen til nr. 4. : None
+en innkjørsel (n)[sound:innkjørsel - wjazd.ogg] : wjazd : Så gikk han ut, satte seg i bilen og rygget ut av innkjørselen til nr. 4. : None
+<i>overskyet (adj)</i> : pochmurny : Da herr og fru Dumling våknet den grå, overskyete tirsdagen denne historien begynner, var det ingenting ved skyene utenfor som tydet på at det snart skulle begynne å skje merkelige og mystiske ting, og det over hele landet. : None
+et hjørne (n)&nbsp;[sound:4087.ogg] : róg : Ved gatehjørnet så han det første tegnet på at ikke alt var som vanlig - en katt som studerte et kart. : None
+et tegn (n)[sound:10386.ogg] : znak, oznaka : Ved gatehjørnet så han det første tegnet på at ikke alt var som vanlig - en katt som studerte et kart. : None
+et kart (n)&nbsp;[sound:5035.ogg] : mapa : Ved gatehjørnet så han det første tegnet på at ikke alt var som vanlig - en katt som studerte et kart. : None
+å blunke (v)[sound:blunke - mrugać.ogg] : mrugać : Det måtte være et eller annet med lyset. : None
+å stirre, å glane (v)[sound:stirre - gapić się.ogg] : gapić się : None : None
+mens (conj)[sound:mens - poczas gdy.ogg] : podczas gdy : Mens herr Dumling svingte om hjørnet og ut på hovedveien, holdt han øye med katten i bakspeilet. : None
+et speil (n)[sound:speil - lustro.ogg] : lustro : Mens herr Dumling svingte om hjørnet og ut på hovedveien, holdt han øye med katten i bakspeilet. : None
+et skilt (n)[sound:skilt - tabliczka.ogg] : tabliczka : Nå sto den og leste gateskiltet med Hekkveien - nei, nei, så på skiltet, selvfølgelig; katter kunne jo ikke lese, hverken kart eller skilt. : None
+hverken (conj)[sound:hverken, eller - ani-ani.ogg] : ani - ani : Nå sto den og leste gateskiltet med Hekkveien - nei, nei, så på skiltet, selvfølgelig; katter kunne jo ikke lese, hverken kart eller skilt. : None
+å riste (v)[sound:riste - potrząsać.ogg] : potrząsać; trząść się : Herr Dummling ristet det hele av seg og skjøv tankene vekk fra katter. : None
+å innbille (v)[sound:innbille - przekonywać.ogg] : przekonywać; przypuszczać : Herrgud, innbille seg slikt? : None
+heldigvis (adj) [sound:heldigvis - na szczęście.ogg] : na szczęście (adv) : Herr og fru Dumling i Hekkveien 4 var heldigvis fullstendig normale, takk. : None
+fullstendig (adj)(adv)[sound:fullstendig - kompletny.ogg] : kompletny; całkowicie : Herr og fru Dumling i Hekkveien 4 var heldigvis fullstendig normale, takk. : None
+slags[sound:slags - rodzaj.ogg] : rodzaj : De var de siste en skulle vente seg innblandet i noe som helst merkelig eller mystisk. Den slags vrøvl holdt de seg for gode til. : None
+å omgås (v) : mieszać, łączyć, socjalizować się : Neimen om de ville at Dudleif skulle omgås en sånn en. : None
+å bråsnu (brå / å snu) : nagły zwrot, nagle obrać inny kierunek (nagły / odwracać) : Dette gikk ikke opp for herr Dumling med det samme, men så bråsnudde han på hodet for å se etter en gang til. : None
+innover (prep)(adv)[sound:innover - do środka.ogg] : po wewnętrznej stronie; do środka : Men på vei innover skjedde noe mer, som jagde all ranke på bormaskiner på flukt. : None
+å jage (v)[sound:jage - przepędzać.ogg] : przepędzać, gonić, ścigać; pędzić, polować : Men på vei innover skjedde noe mer, som jagde all tanke på bormaskiner på flukt. : None
+en flukt (n)[sound:flukt - ucieczka, lot.ogg] : ucieczka; lot : Men på vei innover skjedde noe mer, som jagde all tanke på bormaskiner på flukt. : None
+fast (adj)[sound:fast - na stałe.ogg] : stały, trwały, pewny, przymocowany na stałe : Han satt fast i den vanlige trafikkorken, og det var umulig å unngå å legge merke til at det var uvanlig mange folk i merkelige klær i omløp. : None
+å unngå (v)[sound:unngå - unikać.ogg] : unikać : Han satt fast i den vanlige trafikkorken, og det var umulig å unngå å legge merke til at det var uvanlig mange folk i merkelige klær i omløp. : None
+legge merke til : zauważyć : Han satt fast i den vanlige trafikkorken, og det var umulig å unngå å legge merke til at det var uvanlig mange folk i merkelige klær i omløp. : None
+et omløp (n)[sound:omløp - obieg.ogg] : obieg : Han satt fast i den vanlige trafikkorken, og det var umulig å unngå å legge merke til at det var uvanlig mange folk i merkelige klær i omløp. : None
+å skyve (v)[sound:skyve - przesuwać.ogg] : przesuwać : Herr Dumling ristet det hele av seg og skjøv tenkene vekk fra katter. : None
+en kappe (n)[sound:kappe - peleryna.ogg] : peleryna : Folk i slengkapper. : None
+å tåle (v)[sound:tåle - wytrzymywać, znosić.ogg] : wytrzymywać, znosić : Herr Dumling tålte ikke folk som kledde seg merkelig - tenke seg til de klærne ungdommen gikk rundt i! : None
+en ungdom (n)[sound:ungdom - młodość.ogg] : młodość, młodzieniec : Herr Dumling tålte ikke folk som kledde seg merkelig - tenke seg til de klærne ungdommen gikk rundt i! : None
+tåpelig (adj)[sound:tåpelig - głupi.ogg] : głupi, bezmyślny : Dette var sikkert bare enda en tåpelig motegrille. : None
+en mote (n)[sound:mote - moda.ogg] : moda : Dette var sikkert bare enda en tåpelig motegrille. : None
+å tromme (v)[sound:tromme - bębnić.ogg] : bębnić : Han trommet med fingrene mot rattet, mens blikket falt på en klynge av disse tullingene like ved. : None
+et ratt (n)[sound:ratt - kierownica.ogg] : kierownica : Han trommet med fingrene mot rattet, mens blikket falt på en klynge av disse tullingene like ved. : None
+et blikk (n)[sound:blikk - wzrok.ogg] : wzrok : Han trommet med fingrene mot rattet, mens blikket falt på en klynge av disse tullingene like ved. : None
+å falle (v)[sound:falle - upadać.ogg] : upadać, wpadać : Han trommet med fingrene mot rattet, mens blikket falt på en klynge av disse tullingene like ved. : None
+en klynge (n)[sound:klynge - skupisko.ogg] : skupisko : Han trommet med fingrene mot rattet, mens blikket falt på en klynge av disse tullingene like ved. : None
+en tulling (n)[sound:tulling.ogg] : głupek : Han trommet med fingrene mot rattet, mens blikket falt på en klynge av disse tullingene like ved. : None
+like ved : tuż przy : Han trommet med fingrene mot rattet, mens blikket falt på en klynge av disse tullingene like ved. : None
+å hviske, å tiske (v)[sound:hviske - szeptać.ogg] : szeptać : None : None
+opphisset (adj)[sound:opphisset - wzburzony, podniecony.ogg] : wzburzony, podniecony : De sto og hvisket opphisset seg imellom. : None
+imellom (prep)[sound:imellom - pomiędzy.ogg] : pomiędzy : De sto og hvisket opphisset seg imellom. : None
+mektig (adj)[sound:mektig - potężny.ogg] : wpływowy, potężny : Mektig fortørnet forsto herr Dumling at noen av dem slett ikke var unge; han der, for eksempel, var sikkert eldre enn Dumling selv, men tror du ikke han hadde smaragdgrønn kappe! At det gikk an! : None
+fortørnet (adj) : rozwścieczony : Mektig fortørnet forsto herr Dumling at noen av dem slett ikke var unge; han der, for eksempel, var sikkert eldre enn Dumling selv, men tror du ikke han hadde smaragdgrønn kappe! At det gikk an! : None
+slett ikke : absolutnie nie : Mektig fortørnet forsto herr Dumling at noen av dem slett ikke var unge; han der, for eksempel, var sikkert eldre enn Dumling selv, men tror du ikke han hadde smaragdgrønn kappe! At det gikk an! : None
+en kø (n)[sound:kø - kolejka.ogg] : kolejka : Køen begynte å bevege seg igjen, og litt senere kjørte herr Dumling inn på parkeringsplassen til Knerk, på ny med tankene på bormaskiner. : None
+å bevege (v)[sound:bevege - poruszać.ogg] : poruszać : Køen begynte å bevege seg igjen, og litt senere kjørte herr Dumling inn på parkeringsplassen til Knerk, på ny med tankene på bormaskiner. : None
+en ugle (n)[sound:11052.ogg] : sowa : Han så ikke uglene som seilte forbi midt på lyse dagen, men det gjorde folk nede på gata. : None
+å seile (v)[sound:8784.ogg] : żeglować, unosić się : Han så ikke uglene som seilte forbi midt på lyse dagen, men det gjorde folk nede på gata. : None
+en midt (n)[sound:6809.ogg] : środek : Han så ikke uglene som seilte forbi midt på lyse dagen, men det gjorde folk nede på gata. : None
+å peke (v)[sound:7749.ogg] : wskazywać : De sto med åpen munn og pekte, mens den ene ugla etter den andre suste forbi over dem. : None
+ene (adv)[sound:2045.ogg] : wyłącznie : De sto med åpen munn og pekte, mens den ene ugla etter den andre suste forbi over dem. : None
+å suse (v)[sound:10076.ogg] : świstać, pędzić : De sto med åpen munn og pekte, mens den ene ugla etter den andre suste forbi over dem. : None
+engang (adv) : nawet; w rzeczywistości : De fleste hadde aldri sett en ugle, ikke om natten engang. : None
+å tilbringe (v)[sound:10493.ogg] : spędzać : Men herr Dumling tilbragte en aldeles normal, uglefri formiddag med å brøle til fem forskjellige mennesker, ta en rekke viktige telefoner og deretter brøle litt mer. : None
+aldeles (adv)[sound:103.ogg] : całkowicie, zupełnie : Men herr Dumling tilbragte en aldeles normal, uglefri formiddag med å brøle til fem forskjellige mennesker, ta en rekke viktige telefoner og deretter brøle litt mer. : None
+å brøle (v)[sound:1262.ogg] : ryczeć, wrzeszczeć : Men herr Dumling tilbragte en aldeles normal, uglefri formiddag med å brøle til fem forskjellige mennesker, ta en rekke viktige telefoner og deretter brøle litt mer. : None
+en rekke (n)[sound:8368.ogg] : szereg, rząd : Men herr Dumling tilbragte en aldeles normal, uglefri formiddag med å brøle til fem forskjellige mennesker, ta en rekke viktige telefoner og deretter brøle litt mer. : None
+deretter (adv)[sound:1522.ogg] : potem, następnie : Men herr Dumling tilbragte en aldeles normal, uglefri formiddag med å brøle til fem forskjellige mennesker, ta en rekke viktige telefoner og deretter brøle litt mer. : None
+strålende (adj)[sound:9958.ogg] : olśniewający : Han var i strålende humør helt til lunsj. : None
+nemlig (adv)[sound:7178.ogg] : mianowicie; ależ tak : Da fant han nemlig ut at han ville strekke beina litt og gå og kjøpe en bolle hos bakeren over gata. : None
+å strekke (v)[sound:9914.ogg] : naciągać, rozciągać : Da fant han nemlig ut at han ville strekke beina litt og gå og kjøpe en bolle hos bakeren over gata. : None
+i forbifarten : mimochodem : I forbifarten glante han sint på dem. : None
+ille (adj)[sound:4429.ogg] : zły : Han visste ikke riktig hvorfor, men det var noe ved dem som gjorde ham ille ved. : None
+en flokk (n)[sound:2534.ogg] : stado : Denne flokken sto også og tisket opphisset seg imellom, men han kunne ikke se en eneste innsamlingsbøsse. : None
+eneste (adj)[sound:2052.ogg] : jedyny : Denne flokken sto også og tisket opphisset seg imellom, men han kunne ikke se en eneste innsamlingsbøsse. : None
+en innsamling (n)[sound:4622.ogg] : zbiórka : Denne flokken sto også og tisket opphisset seg imellom, men han kunne ikke se en eneste innsamlingsbøsse. : None
+en bøsse (n) (saltbøsse/sparebøsse)[sound:1364.ogg] : pojemnik z dziurką (solniczka/skarbonka) : Denne flokken sto også og tisket opphisset seg imellom, men han kunne ikke se en eneste innsamlingsbøsse. : None
+brokke : fragment : På tilbakeveien, med en stor smultring i en pose i hånden, overhørte han noen brokker av samtalen. : None
+en samtale (n)[sound:8724.ogg] : rozmowa : På tilbakeveien, med en stor smultring i en pose i hånden, overhørte han noen brokker av samtalen. : None
+nettopp (adv)[sound:7199.ogg] : dokładnie; dopiero co, właśnie : None : None
+å fylle (v)[sound:3212.ogg] : napełniać, wypełniać : Herr Dumling bråstoppet. Han ble fylt av frykt. : None
+et sted (n)[sound:9785.ogg] : miejsce : I stedet løp han over gata, skyndte seg opp på kontoret igjen, glefset til sekretæren sin at han ikke måtte forstyrres, grep telefonen og hadde nesten slått hele nummeret hjem før han ombestemte seg. : None
+å skynde (v)[sound:9264.ogg] : śpieszyć się : I stedet løp han over gata, skyndte seg opp på kontoret igjen, glefset til sekretæren sin at han ikke måtte forstyrres, grep telefonen og hadde nesten slått hele nummeret hjem før han ombestemte seg. : None
+å glefse (v)[sound:3487.ogg] : warknąć : I stedet løp han over gata, skyndte seg opp på kontoret igjen, glefset til sekretæren sin at han ikke måtte forstyrres, grep telefonen og hadde nesten slått hele nummeret hjem før han ombestemte seg. : None
+å forstyrre (v)[sound:2919.ogg] : przeszkadzać, zaburzać : I stedet løp han over gata, skyndte seg opp på kontoret igjen, glefset til sekretæren sin at han ikke måtte forstyrres, grep telefonen og hadde nesten slått hele nummeret hjem før han ombestemte seg. : None
+å ombestemme (v)[sound:7363.ogg] : zmieniać zdanie : I stedet løp han over gata, skyndte seg opp på kontoret igjen, glefset til sekretæren sin at han ikke måtte forstyrres, grep telefonen og hadde nesten slått hele nummeret hjem før han ombestemte seg. : None
