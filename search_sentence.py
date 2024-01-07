@@ -1,7 +1,7 @@
 import tkinter as tk
 import os
 import re
-from configuration import save_word_list
+from configuration import save_flashcards
 from ui import center_window, create_label, create_button
 from open_ai import book_sentence_translation
 
@@ -74,7 +74,7 @@ class AddSentence:
     def add_to_sentence_list(self):
         self.save_button.config(state=tk.DISABLED)
         self.dictionary[self.current_word][1] = self.search_sentences[self.current_index - 1]
-        save_word_list(self.file_path, self.dictionary)
+        save_flashcards(self.file_path, self.dictionary)
 
     def generate_translation(self):
         pass

@@ -4,7 +4,7 @@ import random
 import re
 from tkinter import filedialog
 from search_sentence import AddSentence
-from configuration import import_file_to_dictionary, pronunciation
+from configuration import import_flashcards_to_dictionary, pronunciation
 from ui import center_window, create_button, create_label, create_entry, create_frame
 
 

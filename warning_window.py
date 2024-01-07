@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import os
 import shutil
-from configuration import import_file_to_dictionary, save_word_list
+from configuration import import_flashcards_to_dictionary, save_flashcards
 from ui import center_window, create_label, create_frame, create_button
 
 
@@ -47,8 +47,8 @@ class WarningWindow:
                 self.top.destroy()
 
             if '#separator:tab' in self.first_line and '#html:true' in self.second_line:
-                dictionary = import_file_to_dictionary(self.file_path)
-                save_word_list(self.file_path, dictionary)
+                dictionary = import_flashcards_to_dictionary(self.file_path)
+                save_flashcards(self.file_path, dictionary)
 
     def close_window(self):
         self.top.destroy()

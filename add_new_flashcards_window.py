@@ -6,9 +6,11 @@ import open_ai
 import ui
 
 
-def remove_duplicate_elements(pairs):
+def remove_duplicate_elements(pairs: list) -> list:
     """
     Usuwa zduplikowane zdania z listy self.pairs, w której do każdego wyrazu przypisane jest zdanie.
+
+    :param pairs: Lista par ['słowo', 'zdanie'].
     """
     sentences = [pairs[1] for pairs in pairs]
     unique_sentences = []
@@ -19,18 +21,18 @@ def remove_duplicate_elements(pairs):
 
 
 class FlashcardsInputDialog:
-    def __init__(self, master, dictionary, file_path, question='', sentence='', pairs='', book_name=''):
+    def __init__(self, master, dictionary: dict, file_path: str,
+                 question: str = '', sentence: str = '', pairs: list = None, book_name: str = ''):
         """
-        Tworzy okno dodawania słów do kursu.
+        Inicjalizuje obiekt klasy FlashcardsInputDialog z oknem dodawania słów do kursu.
 
-        Parametry:
-        - master: Uchwyt do głównego okna, w którym pojawi się okno dialogowe.
-        - dictionary: Słownik do wprowadzania i zapisywania zmian.
-        - file_path: Ścieżka do pliku, do którego będą zapisywane zmiany.
-        - question: Domyślne słowo (pytanie).
-        - sentence: Domyślne zdanie.
-        - pairs: Lista par słowo-zdanie.
-        - book_name: Tytuł książki z autorem lub nazwa kursu.
+        :param master: Uchwyt do głównego okna, w którym pojawi się okno dialogowe.
+        :param dictionary: Słownik do wprowadzania i zapisywania zmian.
+        :param file_path: Ścieżka do pliku, do którego będą zapisywane zmiany.
+        :param question: Słowo (pytanie). Domyślnie ''.
+        :param sentence: Zdanie. Domyślnie ''.
+        :param pairs: Lista par ['słowo', 'zdanie']. Domyślnie None.
+        :param book_name: Tytuł książki z autorem lub nazwa kursu. Domyślnie ''.
         """
         self.top = tk.Toplevel(master)
 
@@ -174,7 +176,7 @@ class FlashcardsInputDialog:
         else:
             self.standard_word_translation(question)
 
-    def standard_word_translation(self, question):
+    def standard_word_translation(self, question: str):
         # W trakcie tworzenia.
         pass
 
@@ -198,11 +200,11 @@ class FlashcardsInputDialog:
         else:
             self.standard_sentence_translation(self.current_sentence)
 
-    def standard_sentence_translation(self, sentence):
+    def standard_sentence_translation(self, sentence: str):
         # W trakcie tworzenia.
         pass
 
-    def update_dictionary(self, question, answer):
+    def update_dictionary(self, question: str, answer: str):
         """
         Aktualizuje słownik i zapisuje go do pliku.
         """
@@ -220,7 +222,7 @@ class FlashcardsInputDialog:
         current_value.append(self.current_sentence_translation)
 
         # Zapisanie zaktualizowanego słownika do pliku
-        configuration.save_word_list(self.file_path, self.dictionary)
+        configuration.save_flashcards(self.file_path, self.dictionary)
 
         self.entry_question.delete(0, tk.END)
         self.entry_answer.delete(0, tk.END)

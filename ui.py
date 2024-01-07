@@ -1,6 +1,6 @@
 import tkinter as tk
 import textwrap
-from configuration import save_to_courses_list, courses_list_update
+import configuration
 
 
 def create_frame(root, side):
@@ -10,15 +10,32 @@ def create_frame(root, side):
 
 
 def create_button(root, text: str, command, method: str, *args):
+    """
+    Tworzy i konfiguruje przycisk w interfejsie Tkinter.
+
+    :param root: Okno, na którym ma być umieszczony przycisk.
+    :param text: Tekst wyświetlany na przycisku.
+    :param command: Funkcja (lub metoda), która zostanie wywołana po naciśnięciu przycisku.
+    :param method: Określa, czy przycisk ma być umieszczony za pomocą metody ('place') czy ('pack').
+    :param args: Dodatkowe argumenty przekazywane do metody .place() lub .pack(), w zależności od wybranego method.
+
+    Zwraca utworzony przycisk.
+    """
     button = tk.Button(root, text=text, command=command, width=12)
+
     if method == 'place':
         button.place(*args)
-    if method == 'pack':
+
+    elif method == 'pack':
         button.pack(*args)
+
     return button
 
 
 def create_label(root, text: str, font: str or tuple = 'Arial', wraplength: int = None, method='pack', *args):
+    """
+
+    """
     label = tk.Label(root, text=text, font=font, wraplength=wraplength)
     if method == 'place':
         label.place(*args)
@@ -44,10 +61,9 @@ def center_window(root, width: int, height: int):
     """
     Wyśrodkowuje okno na ekranie.
 
-    Parameters:
-        root: Okno do wyśrodkowania.
-        width (int): Szerokość okna.
-        height (int): Wysokość okna.
+    :param root: Okno do wyśrodkowania.
+    :param width: Szerokość okna.
+    :param height: Wysokość okna.
     """
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -57,12 +73,29 @@ def center_window(root, width: int, height: int):
 
 
 class ListBox:
-    def __init__(self, app, courses_list):
-        self.app = app
-        self.courses_list = courses_list
-        self.listbox = self.list_box()
+    def __init__(self, class_handle, courses_list):
+        """
+        Inicjalizuje obiekt klasy ListBox.
 
-    def list_box(self):
+        Parametry:
+        :param class_handle: Uchwyt klasy LiviaApp, reprezentujący główne okno programu.
+        :param courses_list: Lista z nazwami kursów.
+
+        Atrybuty:
+        - app: Przechowuje uchwyt klasy LiviaApp.
+        - courses_list: Przechowuje listę z nazwami kursów.
+        - listbox: Przechowuje obiekt klasy tk.Listbox.
+        """
+        self.class_handle = class_handle
+        self.courses_list = courses_list
+        self.listbox = self.create_list_box()
+
+    def create_list_box(self):
+        """
+        Tworzy i konfiguruje listbox do wyświetlania kursów w interfejsie użytkownika.
+        :return:
+        Zwraca obiekt klasy tk.Listbox.
+        """
         max_length = 38
         self.listbox = tk.Listbox(width=max_length - 8, height=20)
         self.listbox.pack(anchor="ne", padx=10, pady=10)
@@ -77,17 +110,29 @@ class ListBox:
         return self.listbox
 
     def listbox_select(self, _event):
+        """
+        Metoda jest wywoływana po kliknięciu kursu w listbox. Aktualizuje listę kursów, zapisuje ją do pliku
+        i wywołuje metodę update_from_listbox z klasy LiviaApp w celu zaktualizowania ścieżki, nazwy kursu i słownika.
+        :param _event:
+        """
+        # Pobranie indeksu klikniętego kursu w listbox.
         selected_index = self.listbox.curselection()
-        if selected_index:
-            selected_item = self.listbox.get(selected_index)
-            self.listbox.delete(selected_index)
-            self.listbox.insert(0, selected_item)
-            if '...' in selected_item:
-                selected = selected_item.replace('...', '')
-            else:
-                selected = selected_item
 
-            self.courses_list = courses_list_update(selected)
+        # Pobranie nazwy zaznaczonego kursu.
+        selected_course = self.listbox.get(selected_index)
 
-            save_to_courses_list(self.courses_list)
-            self.app.update_from_listbox(selected_item)
+        # Usunięcie zaznaczonego kursu z listbox i wstawienie go na pierwszą pozycję.
+        self.listbox.delete(selected_index)
+        self.listbox.insert(0, selected_course)
+
+        # Usunięcie ewentualnych trzech kropek z nazwy kursu.
+        if '...' in selected_course:
+            selected = selected_course.replace('...', '')
+        else:
+            selected = selected_course
+
+        # Aktualizacja kolejności w liście kursów.
+        self.courses_list = configuration.courses_list_update(selected)
+        # Zapisanie aktualnej kolejności kursów do pliku
+        configuration.save_courses_list_to_file(self.courses_list)
+        self.class_handle.update_from_listbox(selected_course)
