@@ -1,5 +1,7 @@
+import os
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import filedialog
 from pathlib import Path
 
 import ui
@@ -17,7 +19,7 @@ class LiviaApp:
         """
         Inicjalizuje obiekt klasy LiviaApp, tworząc główne okno programu.
 
-        :param root: Główne okno programu (obiekt klasy Tkinter Tk()).
+        :param root: Obiekt klasy Tkinter Tk()).
         """
 
         self.master = root
@@ -46,6 +48,7 @@ class LiviaApp:
         """
         Aktualizuje atrybuty klasy LiviaApp (self.file_path, self.book_name i self.dictionary)
         na podstawie wybranego kursu z listbox.
+        Aktualizuje etykietę ze ścieżką aktualnego kursu.
 
         :param selected_course: Aktualnie wybrany kurs z listbox.
         """
@@ -63,42 +66,94 @@ class LiviaApp:
         self.dictionary = configuration.import_flashcards_to_dictionary(self.file_path)
 
     def create_new_course(self):
-        dialog = new_course.CourseCreate(self.master)
-        self.master.wait_window(dialog.top)
-        if dialog.done:
-            self.dictionary = {}
-            self.file_path = dialog.file_path
+        """
+        Tworzy nowy kurs na podstawie danych wprowadzonych w oknie dialogowym.
+        Inicjuje obiekt okna dialogowego new_course.CourseCreate.
+        Aktualizuje atrybuty klasy LiviaApp (self.file_path, self.book_name, self.dictionary i self.courses_list).
+        Aktualizuje etykietę ze ścieżką aktualnego kursu i listbox.
+        """
+        dialog_window = new_course.CourseCreate(self.master, self.courses_list)
+        self.master.wait_window(dialog_window.top)
+
+        if dialog_window.done:
+            self.file_path = dialog_window.file_path
+            self.book_name = Path(self.file_path).stem
             configuration.save_to_config_file(self.file_path)
+            self.dictionary = {}
+            self.courses_list.insert(0, dialog_window.course_name)
+
             self.path_label.config(text=self.file_path)
-            self.courses_list.insert(0, dialog.course_name)
             configuration.save_courses_list_to_file(self.courses_list)
-            self.listbox.listbox.insert(0, dialog.course_name)
+            self.listbox.listbox.insert(0, dialog_window.course_name)
+
         else:
             print('Changes have not been applied.')
 
     def import_from_user_selection(self):
-        file_path = configuration.import_from_user_selection(self.master)
+        """
+        Importuje wybrany plik przez użytkownika.
+        Aktualizuje atrybuty klasy LiviaApp (self.file_path, self.book_name, self.dictionary i self.courses_list)
+        na podstawie wybranego kursu.
+        Aktualizuje etykietę ze ścieżką aktualnego kursu.
+        Aktualizuje listbox.
+        """
+        file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
+
+        # Sprawdzenie, czy plik został wybrany.
         if file_path:
+            dictionary = configuration.import_flashcards_to_dictionary(file_path)
+
+            # Sprawdzenie, czy zawartość pliku była w odpowiednim formacie.
+            if not dictionary:
+                messagebox.showinfo("No flashcard imported.",
+                                    "No flashcard imported. Incorrect format inside the file.")
+                return
+
+            # Sprawdzenie, czy ścieżka pochodzi z folderu z kursami.
+            if '/LiviaApp/lessons/' not in file_path:
+                file_name = os.path.basename(file_path)
+                file_path = 'lessons/' + file_name
+
             self.file_path = file_path
             self.book_name = Path(self.file_path).stem
-            self.path_label.config(text=str(self.file_path))
-            configuration.save_to_config_file(self.file_path)
-            self.dictionary = configuration.import_flashcards_to_dictionary(self.file_path)
+            self.dictionary = dictionary
+            # Importowanie listy plików po utworzeniu pliku w folderze z kursami.
+            self.courses_list = configuration.import_courses_list()
+            # Aktualizacja kolejności w self.courses_list.
             self.courses_list = configuration.courses_list_update(self.book_name)
+
+            configuration.save_to_config_file(self.file_path)
             configuration.save_courses_list_to_file(self.courses_list)
+            self.path_label.config(text=str(self.file_path))
             self.listbox.listbox.delete(0, tk.END)
+
             for course in self.courses_list:
                 self.listbox.listbox.insert(tk.END, course)
 
+        else:
+            print('No file selected.')
+
     def new_word_input(self):
+        """
+        Inicjuje tworzenie nowego okna do wprowadzania nowych fiszek.
+
+        Wywołując tę metodę, tworzy się nowe okno do wprowadzania fiszek, umożliwiając użytkownikowi dodawanie nowych
+        wpisów do słownika fiszek. Klasa FlashcardsInputDialog obsługuje proces wprowadzania i interakcji ze słownikiem.
+        """
         add_new_flashcards_window.FlashcardsInputDialog(self.master, self.dictionary, self.file_path)
 
     def start_learning(self):
+        """
+        Inicjuje obiekt okna dialogowego start_course.CourseDialog.
+
+        Wywołując tę metodę, tworzy się nowe okno do wprowadzania fiszek, umożliwiając użytkownikowi dodawanie nowych
+        wpisów do słownika fiszek. Klasa FlashcardsInputDialog obsługuje proces wprowadzania i interakcji ze słownikiem.
+        """
         if self.dictionary:
-            self.master.withdraw()  # Ukryj główne okno
-            dialog = start_course.CourseDialog(self.master, self.dictionary, self.file_path)
-            self.master.wait_window(dialog.top)  # Poczekaj na zamknięcie okna dialogowego
-            self.master.deiconify()  # Przywróć główne okno
+            self.master.withdraw()  # Ukrywa główne okno programu.
+            dialog_window = start_course.CourseDialog(self.master, self.dictionary, self.file_path)
+            self.master.wait_window(dialog_window.top)  # Czeka na zamknięcie okna dialogowego
+            self.master.deiconify()  # Przywraca główne okno programu.
         else:
             messagebox.showinfo("No flashcard sets.", "Import flashcard sets to start learning.")
 

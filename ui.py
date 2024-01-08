@@ -4,6 +4,12 @@ import configuration
 
 
 def create_frame(root, side):
+    """
+    :param root: Okno, na którym ma być umieszczona ramka.
+    :param side: Strona, na której ma być umieszczona ramka ('top', 'bottom', 'left' lub 'right').
+
+    :return: Obiekt ramki (Frame) umieszczonej na oknie.
+    """
     frame = tk.Frame(root)
     frame.pack(side=side)
     return frame
@@ -11,15 +17,13 @@ def create_frame(root, side):
 
 def create_button(root, text: str, command, method: str, *args):
     """
-    Tworzy i konfiguruje przycisk w interfejsie Tkinter.
-
     :param root: Okno, na którym ma być umieszczony przycisk.
     :param text: Tekst wyświetlany na przycisku.
     :param command: Funkcja (lub metoda), która zostanie wywołana po naciśnięciu przycisku.
     :param method: Określa, czy przycisk ma być umieszczony za pomocą metody ('place') czy ('pack').
-    :param args: Dodatkowe argumenty przekazywane do metody .place() lub .pack(), w zależności od wybranego method.
+    :param args: Dodatkowe argumenty przekazywane do metody .place() lub .pack().
 
-    Zwraca utworzony przycisk.
+    :return: Obiekt przycisku.
     """
     button = tk.Button(root, text=text, command=command, width=12)
 
@@ -34,7 +38,14 @@ def create_button(root, text: str, command, method: str, *args):
 
 def create_label(root, text: str, font: str or tuple = 'Arial', wraplength: int = None, method='pack', *args):
     """
+    :param root: Okno, na którym ma być umieszczona etykieta.
+    :param text: Tekst wyświetlany na etykiecie.
+    :param font: Czcionka tekstu.
+    :param wraplength: Maksymalna szerokość tekstu przed zawinięciem do nowej linii. Domyślnie None.
+    :param method: Określa, czy etykieta ma być umieszczony za pomocą metody ('place') czy ('pack').
+    :param args: Dodatkowe argumenty przekazywane do metody .place() lub .pack().
 
+    :return: Obiekt etykiety.
     """
     label = tk.Label(root, text=text, font=font, wraplength=wraplength)
     if method == 'place':
@@ -44,17 +55,29 @@ def create_label(root, text: str, font: str or tuple = 'Arial', wraplength: int 
     return label
 
 
-def get_label_dimensions(label):
-    width = label.winfo_reqwidth()
-    height = label.winfo_reqheight()
-    return width, height
+def create_entry(root, side, text: str = '', width: int = 20):
+    """
+    :param root: Okno, na którym ma być umieszczone pole do wprowadzania tekstu.
+    :param side: Strona, na której ma być umieszczone pole do wprowadzania tekstu ('left', 'right', 'top' lub 'bottom').
+    :param text: Tekst początkowy wyświetlany w polu do wprowadzania tekstu. Domyślnie ''.
+    :param width: Szerokość pola do wprowadzania tekstu. Domyślnie 20.
 
-
-def create_entry(root, side, text='', width=20):
+    :return: Obiekt pola do wprowadzania tekstu (Entry) umieszczonego na oknie.
+    """
     entry = tk.Entry(root, width=width)
     entry.insert(0, text)
     entry.pack(side=side)
     return entry
+
+
+def get_label_dimensions(label) -> tuple:
+    """
+    :param label: Obiekt etykiety.
+    :return: Krotka zawierająca szerokość i wysokość etykiety.
+    """
+    width = label.winfo_reqwidth()
+    height = label.winfo_reqheight()
+    return width, height
 
 
 def center_window(root, width: int, height: int):
@@ -93,21 +116,20 @@ class ListBox:
     def create_list_box(self):
         """
         Tworzy i konfiguruje listbox do wyświetlania kursów w interfejsie użytkownika.
-        :return:
-        Zwraca obiekt klasy tk.Listbox.
+        :return: Zwraca obiekt klasy tk.Listbox.
         """
         max_length = 38
-        self.listbox = tk.Listbox(width=max_length - 8, height=20)
-        self.listbox.pack(anchor="ne", padx=10, pady=10)
+        listbox = tk.Listbox(width=max_length - 8, height=20)
+        listbox.pack(anchor="ne", padx=10, pady=10)
 
         if self.courses_list:
             for course in self.courses_list:
                 truncated_course = textwrap.shorten(course, width=max_length, placeholder="...")
-                self.listbox.insert(tk.END, truncated_course)
+                listbox.insert(tk.END, truncated_course)
 
-        self.listbox.bind("<ButtonRelease-1>", self.listbox_select)
+        listbox.bind("<ButtonRelease-1>", self.listbox_select)
 
-        return self.listbox
+        return listbox
 
     def listbox_select(self, _event):
         """

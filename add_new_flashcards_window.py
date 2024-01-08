@@ -72,7 +72,9 @@ class FlashcardsInputDialog:
 
     # Metoda edit zamienia istniejące słowo w słowniku, zgodnie z danymi znajdującymi się w polach tekstowych.
     def edit_dictionary(self):
-        # Pobranie aktualnych wartości pytania i odpowiedzi.
+        """
+        Pobiera dane z pól i wywołuje metodę self.update_dictionary.
+        """
         question = self.entry_question.get()
         answer = self.entry_answer.get()
 
@@ -81,6 +83,11 @@ class FlashcardsInputDialog:
         print(f"The word {question} - {answer} has been changed.")
 
     def new_word_input(self):
+        """
+        Sprawdza, czy fiszka z danym słowem (question) już istnieje w słowniku i czy są wypełnione pola ze słowami.
+        Jeżeli słowo (question) jest w słowniku, zmienia nazwę przycisku i command na edit_dictionary.
+        Jeżeli słowa (question) nie ma w słowniku i pola są wypełnione, umieszcza fiszkę w słowniku.
+        """
         # Pobranie aktualnych wartości pytania i odpowiedzi.
         question = self.entry_question.get()
         answer = self.entry_answer.get()
@@ -92,9 +99,12 @@ class FlashcardsInputDialog:
             # Wyświetlenie tłumaczenia słowa w polu answer i zmiana nazwy przycisku na 'Edit'.
             self.entry_answer.insert(0, self.dictionary[question][0])
             self.ok_button.config(text='Edit', command=self.edit_dictionary)
+            self.entry_question.config(state="readonly")
+
         elif question and answer:
             self.update_dictionary(question, answer)
             print(f"The word {question} - {answer} has been added.")
+
         # Wyświetlenie informacji o błędzie w przypadku pozostawienia pustego pola.
         else:
             messagebox.showinfo("Input Error", "You need to fill in the fields for question and answer.")

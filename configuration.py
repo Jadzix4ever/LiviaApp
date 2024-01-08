@@ -1,7 +1,4 @@
-import requests
 import os
-from pathlib import Path
-from tkinter import filedialog
 from bs4 import BeautifulSoup
 from gtts import gTTS
 
@@ -86,6 +83,11 @@ def import_flashcards_to_dictionary(file_path: str) -> dict:
                     value = [content[i - 2].strip().strip('"'), sentence, 'None']
                     dictionary[key] = value
 
+            # Sprawdzenie, czy plik znajduje się w folderze z kursami.
+            if '/LiviaApp/lessons/' not in file_path:
+                file_name = os.path.basename(file_path)
+                file_path = 'lessons/' + file_name
+
             # Od razu zapisuję plik z nowym układem znaków.
             save_flashcards(file_path, dictionary)
 
@@ -107,8 +109,8 @@ def import_flashcards_to_dictionary(file_path: str) -> dict:
 
         return dictionary
 
-    except FileNotFoundError or IndexError:
-        print('FileNotFoundError or IndexError')
+    except FileNotFoundError:
+        print('FileNotFoundError')
 
 
 def save_flashcards(file_path: str, dictionary: dict):
@@ -144,36 +146,12 @@ def courses_list_update(selected_course: str) -> list:
     return courses
 
 
-def import_from_user_selection(root):
-    from warning_window import WarningWindow
-    file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
-    if file_path:
-        with open(file_path, 'r') as file:
-            first_line = file.readline().strip()
-            second_line = file.readline().strip()
-        if not is_good_location(file_path):
-            dialog = WarningWindow(root, first_line, second_line, file_path)
-            root.wait_window(dialog.top)
-            file_path = dialog.file_path
-            print(file_path)
-        with open('config/config.txt', 'w') as file:
-            file.write(file_path)
-        return file_path
-    else:
-        return
-
-
-def download_website_content():
-    r = requests.get('https://www.gutenberg.org/cache/epub/36/pg36.txt')
-    content = r.text
-    with open('books/requested book.txt', 'w') as file:
-        file.write(content)
-
-    if r.status_code == 200:
-        print('Strona wczytana poprawnie.')
-
-
 def save_to_config_file(file_path):
+    """
+    Zapisuje ścieżkę do pliku w 'config/config.txt'.
+
+    :param file_path: Ścieżka do pliku.
+    """
     with open('config/config.txt', 'w') as file:
         file.write(file_path)
 
@@ -191,13 +169,3 @@ def pronunciation(text: str):
     text_to_speech.save("config/pronunciation.mp3")
 
     os.system("afplay config/pronunciation.mp3")
-
-
-def is_good_location(file_path):
-    program_location = os.getcwd()
-    correct_location = program_location + "/lessons/"
-    file_name = Path(file_path).name
-    if correct_location + file_name != file_path:
-        return False
-    else:
-        return True

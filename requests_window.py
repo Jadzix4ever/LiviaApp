@@ -29,6 +29,9 @@ class RequestsWindow:
             paragraphs = soup.find_all('p')
             text = '\n'.join([paragraf.get_text() for paragraf in paragraphs])
 
+            if response.status_code == 200:
+                print('Strona wczytana poprawnie.')
+
         with open('lessons/books/' + file_name + '.txt', 'w', encoding='utf-8') as file:
             file.write(text)
 
