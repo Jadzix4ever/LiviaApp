@@ -5,6 +5,10 @@ import ui
 
 class CourseCreate:
     def __init__(self, root, courses_list):
+        """
+        :param root: Uchwyt do głównego okna.
+        :param courses_list: Lista kursów do sprawdzenia, czy plik o podanej nazwie już istnieje.
+        """
         self.top = tk.Toplevel(root)
 
         ui.center_window(self.top, 300, 100)

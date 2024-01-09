@@ -24,9 +24,7 @@ class FlashcardsInputDialog:
     def __init__(self, master, dictionary: dict, file_path: str,
                  question: str = '', sentence: str = '', pairs: list = None, book_name: str = ''):
         """
-        Inicjalizuje obiekt klasy FlashcardsInputDialog z oknem dodawania słów do kursu.
-
-        :param master: Uchwyt do głównego okna, w którym pojawi się okno dialogowe.
+        :param master: Uchwyt do okna.
         :param dictionary: Słownik do wprowadzania i zapisywania zmian.
         :param file_path: Ścieżka do pliku, do którego będą zapisywane zmiany.
         :param question: Słowo (pytanie). Domyślnie ''.

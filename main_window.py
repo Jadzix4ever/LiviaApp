@@ -1,4 +1,5 @@
 import os
+import textwrap
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
@@ -17,8 +18,6 @@ import requests_window
 class LiviaApp:
     def __init__(self, root):
         """
-        Inicjalizuje obiekt klasy LiviaApp, tworząc główne okno programu.
-
         :param root: Obiekt klasy Tkinter Tk()).
         """
 
@@ -128,7 +127,8 @@ class LiviaApp:
             self.listbox.listbox.delete(0, tk.END)
 
             for course in self.courses_list:
-                self.listbox.listbox.insert(tk.END, course)
+                truncated_course = textwrap.shorten(course, width=38, placeholder="...")
+                self.listbox.listbox.insert(tk.END, truncated_course)
 
         else:
             print('No file selected.')
@@ -151,7 +151,7 @@ class LiviaApp:
         """
         if self.dictionary:
             self.master.withdraw()  # Ukrywa główne okno programu.
-            dialog_window = start_course.CourseDialog(self.master, self.dictionary, self.file_path)
+            dialog_window = start_course.CourseDialog(self.master, self.dictionary, self.file_path, self.book_name)
             self.master.wait_window(dialog_window.top)  # Czeka na zamknięcie okna dialogowego
             self.master.deiconify()  # Przywraca główne okno programu.
         else:

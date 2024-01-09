@@ -1,3 +1,6 @@
+import re
+
+
 def book_import(book_name):
     try:
         with open('lessons/books/' + book_name + '.txt', 'r') as file:
@@ -139,3 +142,19 @@ def find_first_sentence(second_part, book, page):
 
     else:
         return ''
+
+
+def divide_content_into_sentences(content: str) -> list:
+    """
+    Dzieli zawartość tekstu na zdania przy użyciu wyrażenia regularnego.
+
+    Wyrażenie regularne:
+    - (?<!\\w\\.\\w.): Negative lookbehind, sprawdza, czy przed "." nie ma kropki w środku słowa.
+    - (?<![A-Z][a-z]\\.): Negative lookbehind, sprawdza, czy przed "." nie ma skrótu z jedną dużą i jedną małą literą.
+    - (?<=[.?]): Positive lookbehind, sprawdza, czy przed spacją jest "." lub "?".
+
+    :param content: Tekst, który ma zostać podzielony na zdania.
+    :return: Lista zawierająca zdania podzielone z tekstu.
+    """
+    sentences = re.split(r'(?<!\\w\\.\\w.)(?<![A-Z][a-z]\\.)(?<=[.?])\s', content)
+    return sentences

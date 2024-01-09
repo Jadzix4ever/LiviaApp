@@ -15,17 +15,18 @@ def create_frame(root, side):
     return frame
 
 
-def create_button(root, text: str, command, method: str, *args):
+def create_button(root, text: str, command, method: str, *args, width: int = 12):
     """
     :param root: Okno, na którym ma być umieszczony przycisk.
     :param text: Tekst wyświetlany na przycisku.
     :param command: Funkcja (lub metoda), która zostanie wywołana po naciśnięciu przycisku.
     :param method: Określa, czy przycisk ma być umieszczony za pomocą metody ('place') czy ('pack').
     :param args: Dodatkowe argumenty przekazywane do metody .place() lub .pack().
+    :param width: Szerokość przycisku.
 
     :return: Obiekt przycisku.
     """
-    button = tk.Button(root, text=text, command=command, width=12)
+    button = tk.Button(root, text=text, command=command, width=width)
 
     if method == 'place':
         button.place(*args)
@@ -96,12 +97,12 @@ def center_window(root, width: int, height: int):
 
 
 class ListBox:
-    def __init__(self, class_handle, courses_list):
+    def __init__(self, root, courses_list):
         """
         Inicjalizuje obiekt klasy ListBox.
 
         Parametry:
-        :param class_handle: Uchwyt klasy LiviaApp, reprezentujący główne okno programu.
+        :param root: Uchwyt głównego okna programu.
         :param courses_list: Lista z nazwami kursów.
 
         Atrybuty:
@@ -109,7 +110,7 @@ class ListBox:
         - courses_list: Przechowuje listę z nazwami kursów.
         - listbox: Przechowuje obiekt klasy tk.Listbox.
         """
-        self.class_handle = class_handle
+        self.app = root
         self.courses_list = courses_list
         self.listbox = self.create_list_box()
 
@@ -118,13 +119,12 @@ class ListBox:
         Tworzy i konfiguruje listbox do wyświetlania kursów w interfejsie użytkownika.
         :return: Zwraca obiekt klasy tk.Listbox.
         """
-        max_length = 38
-        listbox = tk.Listbox(width=max_length - 8, height=20)
+        listbox = tk.Listbox(width=30, height=20)
         listbox.pack(anchor="ne", padx=10, pady=10)
 
         if self.courses_list:
             for course in self.courses_list:
-                truncated_course = textwrap.shorten(course, width=max_length, placeholder="...")
+                truncated_course = textwrap.shorten(course, width=38, placeholder="...")
                 listbox.insert(tk.END, truncated_course)
 
         listbox.bind("<ButtonRelease-1>", self.listbox_select)
@@ -157,4 +157,4 @@ class ListBox:
         self.courses_list = configuration.courses_list_update(selected)
         # Zapisanie aktualnej kolejności kursów do pliku
         configuration.save_courses_list_to_file(self.courses_list)
-        self.class_handle.update_from_listbox(selected_course)
+        self.app.update_from_listbox(selected_course)

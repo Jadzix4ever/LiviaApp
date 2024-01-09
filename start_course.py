@@ -1,44 +1,57 @@
 import os
 import tkinter as tk
+from tkinter import messagebox
 import random
 import re
-from tkinter import filedialog
-from search_sentence import AddSentence
-from configuration import import_flashcards_to_dictionary, pronunciation
-from ui import center_window, create_button, create_label, create_entry, create_frame
+
+import ui
+import search_sentence
+import configuration
+import book_configuration
 
 
 class CourseDialog:
-    def __init__(self, master, dictionary: dict, file_path):
-        self.top = tk.Toplevel(master)
+    def __init__(self, root, dictionary: dict, file_path: str, course_name: str):
+        """
+        :param root: Uchwyt do głównego okna.
+        :param dictionary: Słownik zawierający fiszki do kursu.
+        :param file_path: Ścieżka do pliku kursu.
+        :param course_name: Nazwa kursu.
+        """
+        self.top = tk.Toplevel(root)
 
-        center_window(self.top, 550, 400)
+        ui.center_window(self.top, 550, 400)
 
         self.dictionary = dictionary
-        self.question_word = random.choice(list(self.dictionary.keys()))
+        self.question_word = random.choice(list(self.dictionary.keys()))    # Wylosowanie słowa z kluczy w słowniku.
 
-        frame_top = create_frame(self.top, 'top')
-        create_button(frame_top, 'Prononciation', self.pronunciation_word, 'pack', {'side': 'left'})
-        create_button(frame_top, 'Reverse', self.reverse, 'pack', {'side': 'left'})
-        self.question_label = create_label(self.top, self.question_word, ('Helvetica', 18), 440, 'pack',
-                                           {'side': 'top'})
-        self.answer_label = create_label(self.top, 'Your answer:', 'Helvetica', 440, 'pack', {'side': 'top'})
-        self.entry = create_entry(self.top, 'top')
-        frame_bottom = create_frame(self.top, 'bottom')
-        create_button(frame_bottom, 'Next', self.show_next_question, 'pack', {'side': 'left'})
-        self.check_button = create_button(frame_bottom, 'Check', self.check_answer, 'pack', {'side': 'left'})
-        self.search_sentence_button = create_button(frame_bottom, 'Search sentence', self.search_sentence,
-                                                    'pack', {'side': 'left'})
+        frame_top = ui.create_frame(self.top, 'top')
+        ui.create_button(frame_top, 'Pronunciation', self.pronunciation_word, 'pack', {'side': 'left'})
+        ui.create_button(frame_top, 'Reverse', self.reverse, 'pack', {'side': 'left'})
+        self.question_label = ui.create_label(self.top, self.question_word, ('Helvetica', 18), 440, 'pack',
+                                              {'side': 'top'})
+        self.answer_label = ui.create_label(self.top, 'Your answer:', 'Helvetica', 440, 'pack', {'side': 'top'})
+        self.entry = ui.create_entry(self.top, 'top')
+        self.frame_bottom = ui.create_frame(self.top, 'bottom')
+        ui.create_button(self.frame_bottom, 'Next', self.show_next_question, 'pack', {'side': 'left'})
+        self.check_button = ui.create_button(self.frame_bottom, 'Check', self.check_answer, 'pack', {'side': 'left'})
+        self.search_sentence_button = ui.create_button(self.frame_bottom, 'Search sentence', self.search_sentence,
+                                                       'pack', {'side': 'left'})
+        self.play_sentence_button = None
 
         self.file_path = file_path
-        self.file_path_book = None
+        self.book_content = book_configuration.book_import(course_name)
+        self.book_content = book_configuration.book_text_cleaning(self.book_content)
+        self.course_name = course_name
 
-        self.reverse_number = 1
+        self.reverse_number = 1     # Zmienna kontrolująca tryb odwrócony
         self.answer_word = self.dictionary[self.question_word][0]
         self.sentence = self.dictionary[self.question_word][1]
-        # self.generated_sentence_dictionary = {self.dictionary[self.question_word]: self.generated_sentence}
 
     def reverse(self):
+        """
+        Tryb odwrócony — odwraca pytanie i odpowiedź.
+        """
         self.reverse_number += 1
 
         if self.reverse_number % 2 != 0:
@@ -49,6 +62,14 @@ class CourseDialog:
             self.search_sentence_button.config(state=tk.DISABLED)
 
     def show_next_question(self):
+        """
+        Wyświetla kolejne pytanie i przywraca domyślne ustawienia.
+        """
+        try:
+            self.play_sentence_button.destroy()
+        except AttributeError:
+            print('NoneType')
+
         self.answer_label.config(text="Your answer:")
         self.check_button.config(text='Check', command=self.check_answer)
         self.search_sentence_button.config(text='Search sentence', command=self.search_sentence)
@@ -66,15 +87,24 @@ class CourseDialog:
         self.entry.delete(0, tk.END)
 
     def search_sentence(self):
-        if not self.file_path_book:
-            self.file_path_book = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
-        if self.file_path_book:
-            dialog = AddSentence(self.top, self.question_word, self.file_path_book, self.file_path, self.dictionary)
-            self.top.wait_window(dialog.top)  # Poczekaj na zamknięcie okna dialogowego
-            self.dictionary = dialog.dictionary
+        """
+        Wywołuje wyszukiwanie zdania dla aktualnego słowa i aktualizuje dane.
+        """
+        try:
+            dialog_window = search_sentence.AddSentence(self.top, self.question_word, self.book_content[1],
+                                                        self.file_path, self.dictionary, self.course_name)
+            self.top.wait_window(dialog_window.top)
+            self.dictionary = dialog_window.dictionary
             self.sentence = self.dictionary[self.question_word][1]
 
+        except FileNotFoundError:
+            print('FileNotFoundError')
+            messagebox.showinfo("No file in books", f"No file for {self.course_name}.")
+
     def check_answer(self):
+        """
+        Sprawdza odpowiedź użytkownika i aktualizuje etykiety.
+        """
         user_answer = self.entry.get()
         answer_correct = []
 
@@ -84,30 +114,34 @@ class CourseDialog:
             cleaned_words = re.sub(r'\([^)]*\)', '', self.question_word)
 
         words = [word.strip() for word in re.split(r'[;,]\s*', cleaned_words) if word]
+
         for word in words:
             if word in user_answer:
                 answer_correct.append(word.lower())
 
         if self.reverse_number % 2 != 0:
+
             if answer_correct:
                 self.question_label.config(text=self.question_word + '\n' + ', '.join(answer_correct), fg="green")
-            self.answer_label.config(text=f"{self.answer_word}{'\n'}"
-                                          f"Sentence: {self.sentence}")
+            self.answer_label.config(text=f"{self.answer_word}{'\n'} Sentence: {self.sentence}")
+
         else:
             if answer_correct:
                 self.question_label.config(text=self.answer_word + '\n' + ', '.join(answer_correct), fg="green")
-            self.answer_label.config(text=f"{self.question_word}{'\n'}"
-                                          f"Sentence: {self.sentence}")
+            self.answer_label.config(text=f"{self.question_word}{'\n'} Sentence: {self.sentence}")
 
-        if self.sentence and self.sentence != 'None':
-            print(self.sentence)
-            self.search_sentence_button.config(text='Play the sentence', command=self.pronunciation_sentence)
+        if self.sentence:
+            self.play_sentence_button = ui.create_button(self.frame_bottom, 'Play', self.pronunciation_sentence,
+                                                         'pack', {'side': 'right', 'anchor': 'se'}, width=4)
 
         if not answer_correct:
             pass
-            # self.check_button.config('Review this word', command=self.review)
+            # self.check_button.config('repetitions', command=self.add_to_repetitions)
 
-    def review(self):
+    def add_to_repetitions(self):
+        """
+        Dodaje aktualne słowo do powtórek.
+        """
         file_name = os.path.basename(self.file_path)
         review_dir = "lessons/review/"
         if not os.path.exists(review_dir):
@@ -135,7 +169,13 @@ class CourseDialog:
         self.show_next_question()
 
     def pronunciation_word(self):
-        pronunciation(self.question_word)
+        """
+        Odtwarza wymowę aktualnego słowa.
+        """
+        configuration.pronunciation(self.question_word)
 
     def pronunciation_sentence(self):
-        pronunciation(self.sentence)
+        """
+        Odtwarza wymowę aktualnego zdania.
+        """
+        configuration.pronunciation(self.sentence)

@@ -1,96 +1,126 @@
 import tkinter as tk
-import os
-import re
-from configuration import save_flashcards
+
+import book_configuration
+import configuration
 from ui import center_window, create_label, create_button
-from open_ai import book_sentence_translation
+import open_ai
 
 
 class AddSentence:
-    def __init__(self, root, current_question_word, file_path_book, file_path, dictionary):
+    def __init__(self, root, current_question_word: str, book_content, file_path: str, dictionary: dict,
+                 course_name: str):
+        """
+        :param root: Uchwyt do okna.
+        :param current_question_word: Aktualne słowo (question), dla którego są szukane zdania.
+        :param book_content: Lista zawierająca zawartość książki, podzieloną na zdania.
+        :param file_path: Ścieżka do pliku z fiszkami.
+        :param dictionary: Słownik przechowujący fiszki.
+        :param course_name: Tytuł książki z autorem lub nazwa kursu.
+        """
         self.top = tk.Toplevel(root)
 
         center_window(self.top, 350, 400)
 
         self.current_word = current_question_word
-        self.file_path_book = file_path_book
-        self.search_sentences = []
+        self.book_content = book_content
+        self.founded_sentences = []
         self.length_search_sentences = None
-        self.book_content = None
+        self.current_sentence = dictionary[self.current_word][1]
+        self.translated_sentence = dictionary[self.current_word][2]
 
+        # Wyszukiwanie zdań zawierających słowo kluczowe.
         self.search_sentence()
 
         create_label(self.top, 'for "' + self.current_word + '" founded: ' + str(self.length_search_sentences), 'top')
         create_button(self.top, 'Generate translation', self.generate_translation, 'pack', {'side': 'top'})
         self.original_sentence_label = create_label(self.top, '', 'Arial', 340, 'pack', {'side': 'top'})
-        self.translate_label = create_label(self.top, '', 'Arial', 340, 'pack', {'side': 'top'})
-        self.next_button = create_button(self.top, 'Next', self.choose_sentence, 'pack', {'side': 'bottom'})
-        self.save_button = create_button(self.top, 'Save', self.add_to_sentence_list, 'pack', {'side': 'bottom'})
+        self.translate_label = create_label(self.top, self.translated_sentence, 'Arial', 340, 'pack', {'side': 'top'})
+        self.next_button = create_button(self.top, 'Next', self.next_sentence, 'pack', {'side': 'bottom'})
+        self.save_button = create_button(self.top, 'Save', self.save_to_flashcards, 'pack', {'side': 'bottom'})
 
         self.file_path = file_path
         self.dictionary = dictionary
+        self.course_name = course_name
         self.current_index = 0
 
-        self.choose_sentence()
+        # Wyświetlenie pierwszego zdania.
+        self.next_sentence()
 
     def search_sentence(self):
-        with open(self.file_path_book, 'r') as file:
-            self.book_content = file.read()
-            self.book_content = ' '.join(self.book_content.split())
+        """
+        Funkcja przeszukuje zawartość książki w poszukiwaniu zdań zawierających słowo (question).
+        """
+        self.book_content = ' '.join(self.book_content)
+        sentences = book_configuration.divide_content_into_sentences(self.book_content)
 
-            start_marker = 'START OF THE PROJECT GUTENBERG'
-            end_marker = 'END OF THE PROJECT GUTENBERG'
+        self.founded_sentences = [sentence.strip() for sentence in sentences if self.current_word.lower() in
+                                  sentence.lower()]
 
-            start_index = self.book_content.find(start_marker)
-            end_index = self.book_content.find(end_marker)
+        # Usunięcie dodatkowych spacji, które mogły powstać po podziale na zdania.
+        for i in range(len(self.founded_sentences)):
+            sentence = self.founded_sentences[i]
+            sentence = sentence.replace('  ', ' ')
+            self.founded_sentences[i] = sentence
 
-            if start_index != -1 and end_index != -1:
-                self.book_content = self.book_content[start_index + 30:end_index]
+        self.length_search_sentences = len(self.founded_sentences)
 
-            # noinspection PyUnresolvedReferences
-            sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', self.book_content)
-            self.search_sentences = [sentence.strip() for sentence in sentences if self.current_word.lower() in
-                                     sentence.lower()]
-            self.length_search_sentences = len(self.search_sentences)
-
-    def choose_sentence(self):
+    def next_sentence(self):
+        """
+        Funkcja wyświetla kolejne zdanie, sprawdza, czy jest w fiszkach i aktualizuje interfejs użytkownika.
+        """
         if self.length_search_sentences < 2:
             self.next_button.config(state=tk.DISABLED)
-        if self.length_search_sentences:
-            if self.length_search_sentences > self.current_index:
-                index = self.book_content.find(self.search_sentences[self.current_index])
-                percent = (index + 1) / (len(self.book_content) + 1) * 100
-                self.original_sentence_label.config(
-                    text=str(self.search_sentences[self.current_index]) + '\n' + str(round(percent, 1)) + '%')
-                self.current_index += 1
-            else:
-                self.current_index = 0
-                index = self.book_content.find(self.search_sentences[self.current_index])
-                percent = (index + 1) / (len(self.book_content) + 1) * 100
-                self.original_sentence_label.config(
-                    text=str(self.search_sentences[self.current_index]) + '\n' + str(round(percent, 1)) + '%')
-                self.current_index += 1
 
-    def add_to_sentence_list(self):
+        if self.length_search_sentences and self.length_search_sentences > self.current_index:
+
+            # Szukanie miejsca w książce, w którym znajduje się zdanie (wyrażone w procentach).
+            index = self.book_content.find(self.founded_sentences[self.current_index])
+            percent = (index + 1) / (len(self.book_content) + 1) * 100
+
+            self.original_sentence_label.config(text=str(self.founded_sentences[self.current_index]) + '\n\n' + str(
+                round(percent, 1)) + '%' + f'\t{self.current_index + 1}/{self.length_search_sentences}')
+
+            # Zmiana koloru tekstu, jeżeli zdanie jest w fiszkach i wyświetlenie tłumaczenia zdania, jeżeli istnieje.
+            if (self.current_sentence in self.founded_sentences[self.current_index] or
+                    self.founded_sentences[self.current_index] in self.current_sentence):
+                self.original_sentence_label.config(fg="green")
+                self.translate_label.config(text=self.translated_sentence)
+
+                # Wyłączenie przycisku 'save' jeżeli zdanie w fiszkach jest identyczne.
+                if self.current_sentence == self.founded_sentences[self.current_index]:
+                    self.save_button.config(state=tk.DISABLED)
+
+            else:
+                self.original_sentence_label.config(fg="systemTextColor")
+                self.translate_label.config(text='')
+
+            self.current_index += 1
+
+        else:
+            self.current_index = 0
+            self.next_sentence()
+
+    def save_to_flashcards(self):
+        """
+        Funkcja dodaje aktualne zdanie do fiszek, zapisuje zmiany i aktualizuje interfejs użytkownika.
+        """
         self.save_button.config(state=tk.DISABLED)
-        self.dictionary[self.current_word][1] = self.search_sentences[self.current_index - 1]
-        save_flashcards(self.file_path, self.dictionary)
+        self.current_sentence = self.founded_sentences[self.current_index - 1]
+        self.dictionary[self.current_word][1] = self.founded_sentences[self.current_index - 1]
+        self.dictionary[self.current_word][2] = self.translated_sentence
+        configuration.save_flashcards(self.file_path, self.dictionary)
 
     def generate_translation(self):
-        pass
-        # language = 'Polish'
-        # book_name = os.path.basename(self.file_path)
-        # book_name = os.path.splitext(book_name)[0]
-        # book_name_split = book_name.split()
-        # index_of_by = book_name_split.index("by")
-        # book_name = " ".join(book_name_split[:index_of_by])
-        # author = " ".join(book_name_split[index_of_by+1:])
-        # sentence = self.search_sentences[self.current_index - 1]
-        # print('language: ' + language)
-        # print('book_name: ' + book_name)
-        # print('author: ' + author)
-        # print('sentence: ' + sentence)
-        # print('word: ' + self.current_word)
-        # self.dictionary[self.current_word][2] = book_sentence_translation(language, book_name, author, sentence,
-        #                                                                      self.current_word)
-        # self.sentence_label_translate.config(text=str(self.dictionary[self.current_word][2]))
+        """
+        Funkcja generuje tłumaczenie aktualnego zdania przy użyciu API OpenAI.
+        """
+        if ' by ' in self.course_name:
+            self.save_button.config(state=tk.NORMAL)
+            title, author = self.course_name.split(' by ')
+            self.translated_sentence = open_ai.book_sentence_translation(title, author, self.founded_sentences[self.
+                                                                         current_index - 1], self.current_word)
+            self.translate_label.config(text=self.translated_sentence)
+            self.next_button.config(state=tk.DISABLED)
+
+        else:
+            pass
