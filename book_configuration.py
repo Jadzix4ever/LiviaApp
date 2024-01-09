@@ -1,7 +1,13 @@
 import re
 
 
-def book_import(book_name):
+def book_import(book_name: str) -> list or None:
+    """
+    Importuje zawartość książki lub tekstu do kursu z pliku tekstowego.
+
+    :param book_name: Nazwa książki lub tekstu do kursu (nazwa musi być taka sama jak nazwa kursu).
+    :return: Lista zawierająca linie tekstu z pliku książki lub None, jeśli plik nie istnieje.
+    """
     try:
         with open('lessons/books/' + book_name + '.txt', 'r') as file:
             content = file.readlines()
@@ -17,41 +23,64 @@ def book_content_checkout(content):
             return True
 
 
-def book_text_cleaning(content):
-    content = content
+def book_text_cleaning(content: list) -> tuple:
+    """
+    Oczyszcza zawartość książki z niepotrzebnych informacji i dzieli ją na spis treści i tekst książki.
+
+    :param content: Lista zawierająca linie tekstu książki
+    :return: Krotka ([spis treści], [czysty tekst książki])
+    """
+    # Sprawdza, czy zawartość przesłanego tekstu pochodzi ze strony gutenberg.org.
     if book_content_checkout(content) is True:
+        # Szukanie indeksu początku książki.
         start_index = next((i for i, line in enumerate(content) if 'START OF THE PROJECT GUTENBERG' in line), 0)
         start_index = next(i + start_index + 1 for i, line in enumerate(content[start_index:])
                            if 'content' in line.lower())
         start_index = next(i + start_index for i, line in enumerate(content[start_index:]) if line.strip())
 
+        # Szukanie indeksu końca książki.
         end_index = next((i for i, line in enumerate(content) if
                           'END OF THE PROJECT GUTENBERG EBOOK' in line), len(content))
         end_index = next(end_index - i for i, line in enumerate(reversed(content[:end_index])) if line.strip())
+
+        # Wydzielenie tekstu książki pomiędzy znalezionymi indeksami.
         content = content[start_index:end_index]
         content = [line.strip() for line in content]
 
+        #  Dzielenie zawartości na spis treści (TOC) i czysty tekst poprzez sprawdzenie,
+        #  kiedy powtórzy się pierwsza linia.
         toc_index = next(i for i, line in enumerate(content[1:]) if line in content[0] and line.strip())
 
+        # Usunięcie ewentualnych pustych linii z końca spisu treści.
         toc = content[:toc_index]
         while not toc[-1].strip():
             toc.pop()
 
+        # Usunięcie ewentualnych pustych linii z początku tekstu książki.
         text = content[toc_index:]
         while not text[0].strip():
             text.pop(0)
 
-        content = [toc, text]
+        content = (toc, text)
 
         return content
 
     else:
         content = [line.strip() for line in content]
-        content = [[], content]
+        content = ([], content)
+
         return content
 
 
-def words_separated(text):
+def words_separated(text: list) -> list:
+    """
+    Funkcja przyjmuje listę fraz ('text'), łączy je w jeden ciąg znaków,
+    a następnie dzieli ten ciąg na pojedyncze słowa. Ostatecznie zwraca listę słów.
+
+    :param text: Lista fraz do przetworzenia.
+
+    :return: Lista słów.
+    """
     text = ' '.join(text)
     words = text.split()
 

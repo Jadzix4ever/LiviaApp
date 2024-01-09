@@ -158,11 +158,21 @@ class LiviaApp:
             messagebox.showinfo("No flashcard sets.", "Import flashcard sets to start learning.")
 
     def start_reading(self):
+        """
+        Rozpoczyna proces czytania książki.
+
+        Importuje zawartość książki przy użyciu funkcji book_import z pliku book_configuration.
+        Przeprowadza oczyszczenie tekstu książki przy użyciu funkcji book_text_cleaning z pliku book_configuration.
+        Jeśli oczyszczenie tekstu powiedzie się, ukrywa główne okno aplikacji i otwiera okno czytania (Reading).
+        """
         book_content = book_configuration.book_import(self.book_name)
+
         if book_content is None:
             messagebox.showinfo("The file with the text does not exist.", "You need to import a text file.")
             return
-        book_content = book_configuration.book_text_cleaning(book_content)
+
+        _, book_content = book_configuration.book_text_cleaning(book_content)
+
         if book_content:
             self.master.withdraw()
             dialog = reading.Reading(self.master, self.book_name, book_content, self.dictionary, self.file_path)

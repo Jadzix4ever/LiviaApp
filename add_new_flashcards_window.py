@@ -21,18 +21,18 @@ def remove_duplicate_elements(pairs: list) -> list:
 
 
 class FlashcardsInputDialog:
-    def __init__(self, master, dictionary: dict, file_path: str,
+    def __init__(self, root, dictionary: dict, file_path: str,
                  question: str = '', sentence: str = '', pairs: list = None, book_name: str = ''):
         """
-        :param master: Uchwyt do okna.
-        :param dictionary: Słownik do wprowadzania i zapisywania zmian.
-        :param file_path: Ścieżka do pliku, do którego będą zapisywane zmiany.
+        :param root: Uchwyt do okna.
+        :param dictionary: Słownik zawierający fiszki do kursu do wprowadzania i zapisywania zmian.
+        :param file_path: Ścieżka do pliku z fiszkami.
         :param question: Słowo (pytanie). Domyślnie ''.
         :param sentence: Zdanie. Domyślnie ''.
         :param pairs: Lista par ['słowo', 'zdanie']. Domyślnie None.
         :param book_name: Tytuł książki z autorem lub nazwa kursu. Domyślnie ''.
         """
-        self.top = tk.Toplevel(master)
+        self.top = tk.Toplevel(root)
 
         self.number_right_side = 0   # Ustawienie liczby pomocniczej dla dodawania do prawej strony tekstu z listy zdań.
         # dla wszystkich słów na stronie.

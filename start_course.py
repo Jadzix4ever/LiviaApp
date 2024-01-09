@@ -1,4 +1,3 @@
-import os
 import tkinter as tk
 from tkinter import messagebox
 import random
@@ -15,7 +14,7 @@ class CourseDialog:
         """
         :param root: Uchwyt do głównego okna.
         :param dictionary: Słownik zawierający fiszki do kursu.
-        :param file_path: Ścieżka do pliku kursu.
+        :param file_path: Ścieżka do pliku z fiszkami.
         :param course_name: Nazwa kursu.
         """
         self.top = tk.Toplevel(root)
@@ -41,7 +40,7 @@ class CourseDialog:
 
         self.file_path = file_path
         self.book_content = book_configuration.book_import(course_name)
-        self.book_content = book_configuration.book_text_cleaning(self.book_content)
+        _, self.book_content = book_configuration.book_text_cleaning(self.book_content)
         self.course_name = course_name
 
         self.reverse_number = 1     # Zmienna kontrolująca tryb odwrócony
@@ -91,7 +90,7 @@ class CourseDialog:
         Wywołuje wyszukiwanie zdania dla aktualnego słowa i aktualizuje dane.
         """
         try:
-            dialog_window = search_sentence.AddSentence(self.top, self.question_word, self.book_content[1],
+            dialog_window = search_sentence.AddSentence(self.top, self.question_word, self.book_content,
                                                         self.file_path, self.dictionary, self.course_name)
             self.top.wait_window(dialog_window.top)
             self.dictionary = dialog_window.dictionary
@@ -135,38 +134,14 @@ class CourseDialog:
                                                          'pack', {'side': 'right', 'anchor': 'se'}, width=4)
 
         if not answer_correct:
-            pass
-            # self.check_button.config('repetitions', command=self.add_to_repetitions)
+            self.check_button.config(text='repetitions', command=self.add_to_repetitions)
 
     def add_to_repetitions(self):
+        # W trakcie tworzenia
         """
         Dodaje aktualne słowo do powtórek.
         """
-        file_name = os.path.basename(self.file_path)
-        review_dir = "lessons/review/"
-        if not os.path.exists(review_dir):
-            os.makedirs(review_dir)
-        if 'review' in file_name:
-            file_path = os.path.join(review_dir + file_name)
-        else:
-            file_path = os.path.join(review_dir + 'review' + file_name)
-        with open(file_path, 'a+') as file:
-            file.seek(0)
-            content = file.read()
-            file.seek(0, 2)
-        # if self.reverse_number % 2 != 0:
-            if self.question_word not in content:
-                file.write(self.question_word + ' - ' + self.answer_word + '\n')
-                file.write(self.sentence + '\n')
-            else:
-                print(f"{self.question_word} already in review")
-        # else:
-        #     if self.answer_word not in content:
-        #         file.write(self.answer_word + ' - ' + self.question_word + '\n')
-        #         file.write(self.sentence + '\n')
-        #     else:
-        #         print(f"{self.answer_word} already exist")
-        self.show_next_question()
+        pass
 
     def pronunciation_word(self):
         """
