@@ -6,6 +6,8 @@ import ui
 class CourseCreate:
     def __init__(self, root, courses_list):
         """
+        Klasa reprezentująca okno do tworzenia nowego kursu.
+
         :param root: Uchwyt do głównego okna.
         :param courses_list: Lista kursów do sprawdzenia, czy plik o podanej nazwie już istnieje.
         """

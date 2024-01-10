@@ -74,11 +74,9 @@ def book_text_cleaning(content: list) -> tuple:
 
 def words_separated(text: list) -> list:
     """
-    Funkcja przyjmuje listę fraz ('text'), łączy je w jeden ciąg znaków,
-    a następnie dzieli ten ciąg na pojedyncze słowa. Ostatecznie zwraca listę słów.
+    Łączy listę fraz w jeden ciąg znaków, a następnie dzieli go na słowa i zwraca jako listę.
 
     :param text: Lista fraz do przetworzenia.
-
     :return: Lista słów.
     """
     text = ' '.join(text)
@@ -87,25 +85,38 @@ def words_separated(text: list) -> list:
     return words
 
 
-def word_and_sentence(book, page):
-    sentences = create_sentences_for_page(book, page)
+def word_and_sentence_pairs(book_label_positions: dict, page: int) -> list:
+    """
+    Tworzy listę zdań na podstawie pozycji etykiet na danej stronie książki.
+    W funkcji wykorzystywane są 3 odrębne funkcje do uzyskania całych zdań dla poszczególnych słów:
+    create_sentences_for_page, find_last_sentence, find_first_sentence.
+
+    :param book_label_positions: Słownik przechowujący współrzędne etykiet (słów) na poszczególnych stronach książki.
+    :param page: Numer strony, dla której tworzone są zdania.
+    :return: Lista par, które są listą dwuelementową ['słowo', 'zdanie']
+    """
+    # Stworzenie listy zdań dla danej strony.
+    sentences = create_sentences_for_page(book_label_positions, page)
+
+    # Szukanie ostatniego zdania.
     try:
-        if type(sentences[-1]) is list and book[str(page + 1)]:
-            last_sentence = find_last_sentence(sentences[-1], book, page)
+        if type(sentences[-1]) is list and book_label_positions[str(page + 1)]:
+            last_sentence = find_last_sentence(sentences[-1], book_label_positions, page)
             sentences.pop()
             sentences.append(last_sentence)
+
     except KeyError:
         print(f"Key {page + 1} doesn't exist in 'book'.")
 
-    last_word = book[str(page)][-1]
-
-    if page > 1 and '.' not in last_word[0]:
-        first_sentence = find_first_sentence(sentences[0], book, page)
+    # Szukanie pierwszego zdania.
+    if page > 1:
+        first_sentence = find_first_sentence(sentences[0], book_label_positions, page)
         sentences[0] = first_sentence
 
+    # Łączenie słów i zdań w pary jako dwuelementowe listy w liście pairs.
     pairs = []
     number = 0
-    for word in book[str(page)]:
+    for word in book_label_positions[str(page)]:
         if '.' in word[0]:
             pairs.append([word[0], sentences[number]])
             number += 1
@@ -115,62 +126,80 @@ def word_and_sentence(book, page):
     return pairs
 
 
-def create_sentences_for_page(book, page):
+def create_sentences_for_page(book_label_positions: dict, page: int) -> list:
+    """
+    Tworzy listę zdań na podstawie pozycji etykiet na danej stronie książki.
+
+    Przechodzi przez listę etykiet (słów) na danej stronie, łącząc je w zdania.
+    Nowe zdanie rozpoczyna się, gdy słowo zawiera kropkę ('.').
+
+    :param book_label_positions: Słownik przechowujący współrzędne etykiet (słów) na poszczególnych stronach książki.
+    :param page: Numer strony, dla której tworzone są zdania.
+    :return: Lista zdań i lista słow w tej liście jako ostatni element, jeżeli na końcu nie było kropki ('.').
+    """
     number = 0
-    sentences = [[]]  # Rozpoczynamy od jednej pustej listy
-    for word in book[str(page)]:
+    sentences = [[]]
+    for word in book_label_positions[str(page)]:
         if '.' in word[0]:
             sentences[number].append(word[0])
             sentences[number] = ' '.join(sentences[number])
             number += 1
-            sentences.append([])  # Dodaj nową pustą listę na nowe zdanie
+            sentences.append([])
         else:
             sentences[number].append(word[0])
 
     return sentences
 
 
-def find_last_sentence(first_part, book, page):
-    first_part = ' '.join(first_part)
+def find_last_sentence(first_part: list, book_label_positions: dict, page: int) -> str:
+    """
+    Dodawanie słów z następnej strony do listy second_part do momentu znalezienia kropki ('.').
+    Połączenie list first_part i second_part i następnie powstałych fraz w jedno zdanie.
 
-    last_sentence = [[]]
-
-    number = 0
-    for word in book[str(page + 1)]:
+    :param first_part: Lista słów z ostatniego zdania, w którym nie było kropki.
+    :param book_label_positions: Słownik przechowujący współrzędne etykiet (słów) na poszczególnych stronach książki.
+    :param page: Numer strony, dla której tworzone są zdania.
+    :return: Ostatnie zdanie jako string.
+    """
+    second_part = []
+    for word in book_label_positions[str(page + 1)]:
         if '.' in word[0]:
-            last_sentence[number].append(word[0])
-            last_sentence[number] = ' '.join(last_sentence[number])
+            second_part.append(word[0])
             break
         else:
-            last_sentence[number].append(word[0])
+            second_part.append(word[0])
 
-    second_part = last_sentence[0]
+    first_part = ' '.join(first_part)
+    second_part = ' '.join(second_part)
 
     last_sentence = first_part + ' ' + second_part
+
     return last_sentence
 
 
-def find_first_sentence(second_part, book, page):
-    first_sentence = [[]]
-
-    number = 0
-    for word in reversed(book[str(page - 1)]):
-        if '.' not in word[0]:
-            if '.' in word[0]:
-                first_sentence[number] = ' '.join(first_sentence[number])
-                break
-            else:
-                first_sentence[number] = [word[0]] + first_sentence[number]
-        else:
+def find_first_sentence(second_part, book_label_positions: dict, page: int) -> str:
+    """
+    Dodawanie słów z poprzedniej strony do zmiennej typu string do momentu znalezienia kropki ('.').
+    Połączenie fraz w jedno zdanie.
+    :param second_part: Pierwsze zdanie z danej strony.
+    :param book_label_positions: Słownik przechowujący współrzędne etykiet (słów) na poszczególnych stronach książki.
+    :param page: Numer strony, dla której tworzone są zdania.
+    :return: Pierwsze zdanie jako string.
+    """
+    first_part = ''
+    for word in reversed(book_label_positions[str(page - 1)]):
+        # Sprawdzenie, czy ostatnie słowo z poprzedniej strony kończyło się kropką.
+        if '.' in word[0]:
             break
+        else:
+            first_part = word[0] + ' ' + first_part
 
-    if first_sentence[0]:
-        first_part = ' '.join(first_sentence[0])
-        first_sentence = first_part + ' ' + second_part
-        return first_sentence
+    # Upewnienie się, że second_part to string. Może się tak zdarzyć, jeżeli cały tekst nie kończy się kropką.
+    if type(second_part) is list:
+        second_part = ' '.join(second_part)
 
-    else:
-        return ''
+    first_sentence = first_part.strip() + ' ' + second_part
+    return first_sentence
 
 
 def divide_content_into_sentences(content: str) -> list:

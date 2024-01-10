@@ -7,6 +7,11 @@ from ui import center_window, create_entry, create_label, create_button
 
 class RequestsWindow:
     def __init__(self, root, ):
+        """
+        Klasa reprezentująca okno do importowania tekstu z URL do pliku tekstowego.
+
+        :param root: Uchwyt do okna głównego.
+        """
         self.top = tk.Toplevel(root)
         self.top.title("Requests Window")
 
@@ -16,15 +21,19 @@ class RequestsWindow:
         self.url = create_entry(self.top, "top", '', 600)
         create_label(self.top, 'File name:')
         self.file_name = create_entry(self.top, "top", '')
-        create_button(self.top, "Create", self.import_to_txt, 'pack', {'side': 'top'})
+        create_button(self.top, "Create", self.export_text_to_file, 'pack', {'side': 'top'})
 
-    def import_to_txt(self):
+    def export_text_to_file(self):
+        """
+        Pobranie tekstu z URL i zapisanie go do pliku tekstowego.
+        """
         url = self.url.get()
         file_name = self.file_name.get()
         response = requests.get(url)
         text = response.text
 
         if "gutenberg.org" not in url and url[-4:] != '.txt':
+            # Przetworzenie HTML, jeśli strona nie jest z gutenberg.org i nie kończy się na '.txt'
             soup = BeautifulSoup(text, 'html.parser')
             paragraphs = soup.find_all('p')
             text = '\n'.join([paragraf.get_text() for paragraf in paragraphs])

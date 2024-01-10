@@ -12,6 +12,8 @@ import book_configuration
 class CourseDialog:
     def __init__(self, root, dictionary: dict, file_path: str, course_name: str):
         """
+        Klasa reprezentująca okno do przepytywania i sprawdzania odpowiedzi.
+
         :param root: Uchwyt do głównego okna.
         :param dictionary: Słownik zawierający fiszki do kursu.
         :param file_path: Ścieżka do pliku z fiszkami.
@@ -23,6 +25,7 @@ class CourseDialog:
 
         self.dictionary = dictionary
         self.question_word = random.choice(list(self.dictionary.keys()))    # Wylosowanie słowa z kluczy w słowniku.
+        self.show_translated_sentence = 0   # Liczba pomocnicza do wyświetlenia tłumaczenia zdania.
 
         frame_top = ui.create_frame(self.top, 'top')
         ui.create_button(frame_top, 'Pronunciation', self.pronunciation_word, 'pack', {'side': 'left'})
@@ -32,7 +35,8 @@ class CourseDialog:
         self.answer_label = ui.create_label(self.top, 'Your answer:', 'Helvetica', 440, 'pack', {'side': 'top'})
         self.entry = ui.create_entry(self.top, 'top')
         self.frame_bottom = ui.create_frame(self.top, 'bottom')
-        ui.create_button(self.frame_bottom, 'Next', self.show_next_question, 'pack', {'side': 'left'})
+        self.next_button = ui.create_button(self.frame_bottom, 'Next', self.show_next_question,
+                                            'pack', {'side': 'left'})
         self.check_button = ui.create_button(self.frame_bottom, 'Check', self.check_answer, 'pack', {'side': 'left'})
         self.search_sentence_button = ui.create_button(self.frame_bottom, 'Search sentence', self.search_sentence,
                                                        'pack', {'side': 'left'})
@@ -40,7 +44,8 @@ class CourseDialog:
 
         self.file_path = file_path
         self.book_content = book_configuration.book_import(course_name)
-        _, self.book_content = book_configuration.book_text_cleaning(self.book_content)
+        if self.book_content:
+            _, self.book_content = book_configuration.book_text_cleaning(self.book_content)
         self.course_name = course_name
 
         self.reverse_number = 1     # Zmienna kontrolująca tryb odwrócony
@@ -69,10 +74,15 @@ class CourseDialog:
         except AttributeError:
             print('NoneType')
 
+        # Ustawiam wartość na False w celu wyświetlania tłumaczenia zdania w klasie search_sentence.AddSentence.
+        self.show_translated_sentence = 0
+
+        self.check_button.config(state=tk.NORMAL)
         self.answer_label.config(text="Your answer:")
         self.check_button.config(text='Check', command=self.check_answer)
         self.search_sentence_button.config(text='Search sentence', command=self.search_sentence)
 
+        # Wylosowanie fiszki.
         self.question_word = random.choice(list(self.dictionary.keys()))
         self.answer_word = self.dictionary[self.question_word][0]
         self.sentence = self.dictionary[self.question_word][1]
@@ -87,33 +97,39 @@ class CourseDialog:
 
     def search_sentence(self):
         """
-        Wywołuje wyszukiwanie zdania dla aktualnego słowa i aktualizuje dane.
+        Wywołuje wyszukiwanie zdania dla aktualnego słowa i aktualizuje słownik z fiszkami i aktualne zdanie.
         """
-        try:
-            dialog_window = search_sentence.AddSentence(self.top, self.question_word, self.book_content,
-                                                        self.file_path, self.dictionary, self.course_name)
+        if self.book_content:
+            dialog_window = search_sentence.AddSentence(self.top, self.question_word, self.book_content, self.file_path,
+                                                        self.dictionary, self.course_name,
+                                                        self.show_translated_sentence)
             self.top.wait_window(dialog_window.top)
             self.dictionary = dialog_window.dictionary
             self.sentence = self.dictionary[self.question_word][1]
 
-        except FileNotFoundError:
-            print('FileNotFoundError')
+        else:
             messagebox.showinfo("No file in books", f"No file for {self.course_name}.")
 
     def check_answer(self):
         """
         Sprawdza odpowiedź użytkownika i aktualizuje etykiety.
         """
+        # Ustawiam wartość na True w celu wyświetlania tłumaczenia zdania w klasie search_sentence.AddSentence.
+        self.show_translated_sentence = 1
         user_answer = self.entry.get()
-        answer_correct = []
 
+        # Wyrażenie regularne usuwa wszystkie treści w nawiasach okrągłych z self.answer_word lub self.question_word
         if self.reverse_number % 2 != 0:
             cleaned_words = re.sub(r'\([^)]*\)', '', self.answer_word)
         else:
             cleaned_words = re.sub(r'\([^)]*\)', '', self.question_word)
 
+        # Wyrażenie regularne dzieli w miejscach, gdzie występuje przecinek lub średnik i usuwa po nich białe znaki.
+        # Oczyszczone słowa są dzielone na listę, usuwając ewentualne puste elementy.
         words = [word.strip() for word in re.split(r'[;,]\s*', cleaned_words) if word]
 
+        # Sprawdzenie poprawnych odpowiedzi.
+        answer_correct = []
         for word in words:
             if word in user_answer:
                 answer_correct.append(word.lower())
@@ -135,6 +151,10 @@ class CourseDialog:
 
         if not answer_correct:
             self.check_button.config(text='repetitions', command=self.add_to_repetitions)
+
+        else:
+            self.next_button.config(text='Easy')
+            self.check_button.config(state=tk.DISABLED)
 
     def add_to_repetitions(self):
         # W trakcie tworzenia

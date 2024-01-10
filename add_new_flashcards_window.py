@@ -24,6 +24,8 @@ class FlashcardsInputDialog:
     def __init__(self, root, dictionary: dict, file_path: str,
                  question: str = '', sentence: str = '', pairs: list = None, book_name: str = ''):
         """
+        Klasa reprezentująca okno do tworzenia nowych fiszek.
+
         :param root: Uchwyt do okna.
         :param dictionary: Słownik zawierający fiszki do kursu do wprowadzania i zapisywania zmian.
         :param file_path: Ścieżka do pliku z fiszkami.

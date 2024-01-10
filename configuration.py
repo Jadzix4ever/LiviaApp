@@ -55,7 +55,7 @@ def save_courses_list_to_file(courses: list):
             file.write(course + '\n')
 
 
-def import_flashcards_to_dictionary(file_path: str) -> dict:
+def import_flashcards_to_dictionary(file_path: str) -> dict or None:
     """
     Wczytuje wszystkie fiszki z pliku z danym kursem do słownika i sprawdza układ znaków w danym pliku,
     ponieważ w programie również działają kursy wyeksportowane do pliku z programu Anki.
@@ -105,7 +105,7 @@ def import_flashcards_to_dictionary(file_path: str) -> dict:
 
         # Zwracam pusty słownik, jeżeli układ znaków jest niewłaściwy.
         else:
-            return dictionary
+            return None
 
         return dictionary
 

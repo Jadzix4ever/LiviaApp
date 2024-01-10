@@ -18,6 +18,8 @@ import requests_window
 class LiviaApp:
     def __init__(self, root):
         """
+        Klasa reprezentująca główne okno programu.
+
         :param root: Obiekt klasy Tkinter Tk()).
         """
 
@@ -103,7 +105,7 @@ class LiviaApp:
             dictionary = configuration.import_flashcards_to_dictionary(file_path)
 
             # Sprawdzenie, czy zawartość pliku była w odpowiednim formacie.
-            if not dictionary:
+            if dictionary is None:
                 messagebox.showinfo("No flashcard imported.",
                                     "No flashcard imported. Incorrect format inside the file.")
                 return
@@ -171,6 +173,7 @@ class LiviaApp:
             messagebox.showinfo("The file with the text does not exist.", "You need to import a text file.")
             return
 
+        # Na razie spis treści jest niewykorzystywany.
         _, book_content = book_configuration.book_text_cleaning(book_content)
 
         if book_content:
@@ -180,4 +183,7 @@ class LiviaApp:
             self.master.deiconify()
 
     def import_from_url(self):
+        """
+        Inicjuje tworzenie nowego okna do pobierania tekstów do kursów ze stron internetowych.
+        """
         requests_window.RequestsWindow(self.master)

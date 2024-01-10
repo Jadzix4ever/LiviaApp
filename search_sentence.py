@@ -8,14 +8,17 @@ import open_ai
 
 class AddSentence:
     def __init__(self, root, current_question_word: str, book_content, file_path: str, dictionary: dict,
-                 course_name: str):
+                 course_name: str, show_translated_sentence: int):
         """
+        Klasa reprezentująca okno do wyszukiwania zdań w tekście zawierających dane słowo (question).
+
         :param root: Uchwyt do okna.
         :param current_question_word: Aktualne słowo (question), dla którego są szukane zdania.
         :param book_content: Lista zawierająca zawartość książki, podzieloną na zdania.
         :param file_path: Ścieżka do pliku z fiszkami.
         :param dictionary: Słownik przechowujący fiszki.
         :param course_name: Tytuł książki z autorem lub nazwa kursu.
+        :param show_translated_sentence: Liczba pomocnicza do ukrywania tłumaczenia zdania.
         """
         self.top = tk.Toplevel(root)
 
@@ -27,6 +30,7 @@ class AddSentence:
         self.length_search_sentences = None
         self.current_sentence = dictionary[self.current_word][1]
         self.translated_sentence = dictionary[self.current_word][2]
+        self.show_translated_sentence = show_translated_sentence
 
         # Wyszukiwanie zdań zawierających słowo kluczowe.
         self.search_sentence()
@@ -34,7 +38,9 @@ class AddSentence:
         create_label(self.top, 'for "' + self.current_word + '" founded: ' + str(self.length_search_sentences), 'top')
         create_button(self.top, 'Generate translation', self.generate_translation, 'pack', {'side': 'top'})
         self.original_sentence_label = create_label(self.top, '', 'Arial', 340, 'pack', {'side': 'top'})
-        self.translate_label = create_label(self.top, self.translated_sentence, 'Arial', 340, 'pack', {'side': 'top'})
+        if self.show_translated_sentence:
+            self.translate_label = create_label(self.top, self.translated_sentence, 'Arial', 340,
+                                                'pack', {'side': 'top'})
         self.next_button = create_button(self.top, 'Next', self.next_sentence, 'pack', {'side': 'bottom'})
         self.save_button = create_button(self.top, 'Save', self.save_to_flashcards, 'pack', {'side': 'bottom'})
 
@@ -84,7 +90,8 @@ class AddSentence:
             if (self.current_sentence in self.founded_sentences[self.current_index] or
                     self.founded_sentences[self.current_index] in self.current_sentence):
                 self.original_sentence_label.config(fg="green")
-                self.translate_label.config(text=self.translated_sentence)
+                if self.show_translated_sentence:
+                    self.translate_label.config(text=self.translated_sentence)
 
                 # Wyłączenie przycisku 'save' jeżeli zdanie w fiszkach jest identyczne.
                 if self.current_sentence == self.founded_sentences[self.current_index]:
@@ -92,7 +99,8 @@ class AddSentence:
 
             else:
                 self.original_sentence_label.config(fg="systemTextColor")
-                self.translate_label.config(text='')
+                if self.show_translated_sentence:
+                    self.translate_label.config(text='')
 
             self.current_index += 1
 

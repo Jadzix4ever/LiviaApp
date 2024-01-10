@@ -37,7 +37,8 @@ def create_button(root, text: str, command, method: str, *args, width: int = 12)
     return button
 
 
-def create_label(root, text: str, font: str or tuple = 'Arial', wraplength: int = None, method='pack', *args):
+def create_label(root, text: str, font: str or tuple = 'Arial', wraplength: int = None, method='pack', *args,
+                 fg='systemTextColor'):
     """
     :param root: Okno, na którym ma być umieszczona etykieta.
     :param text: Tekst wyświetlany na etykiecie.
@@ -45,10 +46,11 @@ def create_label(root, text: str, font: str or tuple = 'Arial', wraplength: int 
     :param wraplength: Maksymalna szerokość tekstu przed zawinięciem do nowej linii. Domyślnie None.
     :param method: Określa, czy etykieta ma być umieszczony za pomocą metody ('place') czy ('pack').
     :param args: Dodatkowe argumenty przekazywane do metody .place() lub .pack().
+    :param fg: Kolor czcionki.
 
     :return: Obiekt etykiety.
     """
-    label = tk.Label(root, text=text, font=font, wraplength=wraplength)
+    label = tk.Label(root, text=text, font=font, wraplength=wraplength, fg=fg)
     if method == 'place':
         label.place(*args)
     if method == 'pack':
