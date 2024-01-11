@@ -169,3 +169,12 @@ def pronunciation(text: str):
     text_to_speech.save("config/pronunciation.mp3")
 
     os.system("afplay config/pronunciation.mp3")
+
+
+def new_course_create(course_name: str):
+    file_path = os.path.join('lessons', course_name + '.txt')
+    with open(file_path, 'w') as file:
+        file.write("###LiviaApp###\n")
+    print('Plik ' + file_path + ' został utworzony.')
+
+    return file_path

@@ -142,7 +142,10 @@ class LiviaApp:
         Wywołując tę metodę, tworzy się nowe okno do wprowadzania fiszek, umożliwiając użytkownikowi dodawanie nowych
         wpisów do słownika fiszek. Klasa FlashcardsInputDialog obsługuje proces wprowadzania i interakcji ze słownikiem.
         """
-        add_new_flashcards_window.FlashcardsInputDialog(self.master, self.dictionary, self.file_path)
+        if type(self.dictionary) is dict:
+            add_new_flashcards_window.FlashcardsInputDialog(self.master, self.dictionary, self.file_path)
+        else:
+            messagebox.showinfo("Wrong type.", "Wrong flashcards type.")
 
     def start_learning(self):
         """
@@ -176,11 +179,13 @@ class LiviaApp:
         # Na razie spis treści jest niewykorzystywany.
         _, book_content = book_configuration.book_text_cleaning(book_content)
 
-        if book_content:
+        if book_content and type(self.dictionary) is dict:
             self.master.withdraw()
             dialog = reading.Reading(self.master, self.book_name, book_content, self.dictionary, self.file_path)
             self.master.wait_window(dialog.top)
             self.master.deiconify()
+        else:
+            messagebox.showinfo("Wrong type or book_content is empty", "Wrong flashcards type.")
 
     def import_from_url(self):
         """

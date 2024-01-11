@@ -64,7 +64,7 @@ class FlashcardsInputDialog:
         self.current_sentence_translation = self.entry_sentence_translation.get()
 
         # Sprawdzenie, czy słowo już istnieje w słowniku:
-        if self.entry_question.get() in self.dictionary:
+        if self.dictionary and self.entry_question.get() in self.dictionary:
             print(f"The word {question} - {self.dictionary[question]} already exists.")
             self.entry_answer.insert(0, self.dictionary[question][0])
             self.ok_button.config(text='Edit', command=self.edit_dictionary)
@@ -94,7 +94,7 @@ class FlashcardsInputDialog:
 
         # Sprawdzenie, czy słowo (pytanie) już istnieje w słowniku
         # (przydatne w przypadku edytowania słowa np. ze względu na usunięcie przecinka).
-        if question in self.dictionary:
+        if self.dictionary and question in self.dictionary:
             print(f"The word {question} - {self.dictionary[question]} already exists.")
             # Wyświetlenie tłumaczenia słowa w polu answer i zmiana nazwy przycisku na 'Edit'.
             self.entry_answer.insert(0, self.dictionary[question][0])

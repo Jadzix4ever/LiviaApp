@@ -94,7 +94,6 @@ class Reading:
         Etykiety są tworzone w określonych pozycjach (x, y) na podstawie informacji z book_label_positions.
         Każda etykieta jest interaktywna — po kliknięciu otwiera okno do dodawania fiszek (FlashcardsInputDialog).
         """
-        print(self.page)
         self.clear_labels()
         # Do każdego słowa zostaje przypisane zdanie.
         pairs = book_configuration.word_and_sentence_pairs(self.book_label_positions, self.page)

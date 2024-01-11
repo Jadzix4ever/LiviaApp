@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 import ui
+import configuration
 
 
 class CourseCreate:
@@ -32,20 +33,18 @@ class CourseCreate:
         """
         self.course_name = self.entry.get()
 
-        for course in self.courses:
-            if self.course_name.lower() == course.lower():
-                self.label.config(text='In the base already exist.')
-                self.entry.destroy()
-                self.button.config(text='Close', command=self.top.destroy)
-                return
+        if self.course_name:
+            for course in self.courses:
+                if self.course_name.lower() == course.lower():
+                    self.label.config(text='In the base already exist.')
+                    self.entry.destroy()
+                    self.button.config(text='Close', command=self.top.destroy)
+                    return
 
-        self.file_path = os.path.join('lessons', self.course_name + '.txt')
+            # Stworzenie pliku o nazwie kursu.
+            self.file_path = configuration.new_course_create(self.course_name)
 
-        # Stworzenie pustego pliku o nazwie kursu.
-        with open(self.file_path, 'w') as _:
-            print('Plik ' + self.file_path + ' został utworzony.')
-
-        self.label.config(text='You can close this window')
-        self.entry.destroy()
-        self.button.config(text='Close', command=self.top.destroy)
-        self.done = True
+            self.label.config(text='You can close this window')
+            self.entry.destroy()
+            self.button.config(text='Close', command=self.top.destroy)
+            self.done = True

@@ -34,14 +34,19 @@ def book_text_cleaning(content: list) -> tuple:
     if book_content_checkout(content) is True:
         # Szukanie indeksu początku książki.
         start_index = next((i for i, line in enumerate(content) if 'START OF THE PROJECT GUTENBERG' in line), 0)
+        print(start_index)
         start_index = next(i + start_index + 1 for i, line in enumerate(content[start_index:])
                            if 'content' in line.lower())
+        print(start_index)
         start_index = next(i + start_index for i, line in enumerate(content[start_index:]) if line.strip())
+        print(start_index)
 
         # Szukanie indeksu końca książki.
         end_index = next((i for i, line in enumerate(content) if
                           'END OF THE PROJECT GUTENBERG EBOOK' in line), len(content))
+        print('end index:', end_index)
         end_index = next(end_index - i for i, line in enumerate(reversed(content[:end_index])) if line.strip())
+        print('end index:', end_index)
 
         # Wydzielenie tekstu książki pomiędzy znalezionymi indeksami.
         content = content[start_index:end_index]
@@ -49,12 +54,14 @@ def book_text_cleaning(content: list) -> tuple:
 
         #  Dzielenie zawartości na spis treści (TOC) i czysty tekst poprzez sprawdzenie,
         #  kiedy powtórzy się pierwsza linia.
-        toc_index = next(i for i, line in enumerate(content[1:]) if line in content[0] and line.strip())
+        toc_index = next((i for i, line in enumerate(content[1:], start=1) if line in content[0] and line.strip()), 0)
 
-        # Usunięcie ewentualnych pustych linii z końca spisu treści.
+        # Usunięcie ewentualnych pustych linii z końca spisu treści, jeżeli spis treści został wyodrębniony.
         toc = content[:toc_index]
-        while not toc[-1].strip():
-            toc.pop()
+        print(toc_index)
+        if toc:
+            while not toc[-1].strip():
+                toc.pop()
 
         # Usunięcie ewentualnych pustych linii z początku tekstu książki.
         text = content[toc_index:]
