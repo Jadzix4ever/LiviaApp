@@ -18,9 +18,9 @@ class RequestsWindow:
         center_window(self.top, 600, 130)
 
         create_label(self.top, 'URL address:')
-        self.url = create_entry(self.top, "top", '', 600)
+        self.url = create_entry(self.top, "top", '', width=65)
         create_label(self.top, 'File name:')
-        self.file_name = create_entry(self.top, "top", '')
+        self.file_name = create_entry(self.top, "top", '', width=40)
         create_button(self.top, "Create", self.export_text_to_file, 'pack', {'side': 'top'})
 
     def export_text_to_file(self):

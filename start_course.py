@@ -100,12 +100,26 @@ class CourseDialog:
         Wywołuje wyszukiwanie zdania dla aktualnego słowa i aktualizuje słownik z fiszkami i aktualne zdanie.
         """
         if self.book_content:
-            dialog_window = search_sentence.AddSentence(self.top, self.question_word, self.book_content, self.file_path,
-                                                        self.dictionary, self.course_name,
-                                                        self.show_translated_sentence)
-            self.top.wait_window(dialog_window.top)
-            self.dictionary = dialog_window.dictionary
-            self.sentence = self.dictionary[self.question_word][1]
+            book_content = ' '.join(self.book_content)
+            # Wyszukiwanie zdań zawierających słowo kluczowe.
+            founded_sentences = configuration.search_sentence(book_content, self.question_word)
+
+            if founded_sentences:
+                dialog_window = search_sentence.AddSentence(self.top, self.question_word, book_content,
+                                                            self.file_path, self.dictionary, founded_sentences,
+                                                            self.course_name, self.show_translated_sentence)
+                self.top.wait_window(dialog_window.top)
+                self.dictionary = dialog_window.dictionary
+                self.sentence = self.dictionary[self.question_word][1]
+
+                if self.show_translated_sentence:
+                    if self.reverse_number % 2 != 0:
+                        self.answer_label.config(text=f"{self.answer_word}{'\n'} Sentence: {self.sentence}")
+                    else:
+                        self.answer_label.config(text=f"{self.question_word}{'\n'} Sentence: {self.sentence}")
+
+            else:
+                messagebox.showinfo("No sentences.", f"No sentences founded.")
 
         else:
             messagebox.showinfo("No file in books", f"No file for {self.course_name}.")
@@ -150,7 +164,7 @@ class CourseDialog:
                                                          'pack', {'side': 'right', 'anchor': 'se'}, width=4)
 
         if not answer_correct:
-            self.check_button.config(text='repetitions', command=self.add_to_repetitions)
+            self.check_button.config(text='Repetitions', command=self.add_to_repetitions)
 
         else:
             self.next_button.config(text='Easy')

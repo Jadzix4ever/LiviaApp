@@ -101,7 +101,7 @@ class Reading:
 
         for word in self.book_label_positions[str(self.page)]:
             label = ui.create_label(self.top, pairs[number][0], 'Arial, 14', None, 'place',
-                                    {'x': word[1], 'y': word[2]}, fg='#9999CC')
+                                    {'x': word[1], 'y': word[2]})
             label.bind("<Button-1>", lambda event, question=pairs[number][0], sentence=pairs[number][1]:
                        add_new_flashcards_window.FlashcardsInputDialog(self.top, self.dictionary, self.file_path,
                                                                        question, sentence, pairs, self.book_name))

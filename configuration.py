@@ -2,6 +2,8 @@ import os
 from bs4 import BeautifulSoup
 from gtts import gTTS
 
+import book_configuration
+
 
 def auto_config() -> str:
     """
@@ -98,7 +100,7 @@ def import_flashcards_to_dictionary(file_path: str) -> dict or None:
                     parts = line.split(' : ')
                     key = parts[0]
                     if len(parts) < 4:
-                        parts.append('None')
+                        parts.append('')
                     parts[3] = parts[3].replace('\n', '')
                     value = [parts[1], parts[2], parts[3]]
                     dictionary[key] = value
@@ -171,10 +173,35 @@ def pronunciation(text: str):
     os.system("afplay config/pronunciation.mp3")
 
 
-def new_course_create(course_name: str):
+def new_course_create(course_name: str) -> str:
+    """
+    Tworzy pusty plik (bez fiszek) do kursu.
+    :param course_name: Nazwa kursu.
+    :return: Zwraca ścieżkę do kursu.
+    """
     file_path = os.path.join('lessons', course_name + '.txt')
     with open(file_path, 'w') as file:
         file.write("###LiviaApp###\n")
     print('Plik ' + file_path + ' został utworzony.')
 
     return file_path
+
+
+def search_sentence(book_content: str, current_word: str) -> list:
+    """
+    Funkcja przeszukuje zawartość książki w poszukiwaniu zdań zawierających słowo (question).
+    :param book_content: Zawartość książki lub tekstu do kursu.
+    :param current_word: Szukane słowo.
+    :return: Zwraca listę znalezionych zdań.
+    """
+    sentences = book_configuration.divide_content_into_sentences(book_content)
+
+    founded_sentences = [sentence.strip() for sentence in sentences if current_word.lower() in sentence.lower()]
+
+    # Usunięcie dodatkowych spacji, które mogły powstać po podziale na zdania.
+    for i in range(len(founded_sentences)):
+        sentence = founded_sentences[i]
+        sentence = sentence.replace('  ', ' ')
+        founded_sentences[i] = sentence
+
+    return founded_sentences

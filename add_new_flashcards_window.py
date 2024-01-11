@@ -51,12 +51,14 @@ class FlashcardsInputDialog:
         ui.create_label(self.top, 'Sentence:', 'Arial', None, 'pack', {'side': 'top'})
         self.entry_sentence = ui.create_entry(self.top, 'top', sentence, 95)
         ui.create_label(self.top, 'Sentence translation:', 'Arial', None, 'pack', {'side': 'top'})
-        ui.create_button(self.top, 'Auto translation', self.sentence_translation, 'pack', {'side': 'top'})
+        if pairs:
+            ui.create_button(self.top, 'Auto translation', self.sentence_translation, 'pack', {'side': 'top'})
         self.entry_sentence_translation = ui.create_entry(self.top, 'top', '', 95)
         self.ok_button = ui.create_button(self.top, 'OK', self.new_word_input, 'pack', {'side': 'bottom'})
         frame = ui.create_frame(self.top, 'bottom')
-        ui.create_button(frame, 'more left side', self.add_text_to_left_side, 'pack', {'side': 'left'})
-        ui.create_button(frame, 'more right side', self.add_text_to_right_side, 'pack', {'side': 'left'})
+        if pairs:
+            ui.create_button(frame, 'more left side', self.add_text_to_left_side, 'pack', {'side': 'left'})
+            ui.create_button(frame, 'more right side', self.add_text_to_right_side, 'pack', {'side': 'left'})
 
         self.dictionary = dictionary    # Przypisanie słownika do zmiennej do wprowadzania i zapisywania zmian.
         self.file_path = file_path      # Przypisanie ścieżki z plikiem do zmiennej do funkcji zapisywania zmian.
@@ -154,7 +156,7 @@ class FlashcardsInputDialog:
 
         # Sprawdzenie, czy kurs pochodzi z książki (tłumaczenia z książek są dokładniejsze)
         # i czy jest wprowadzone zdanie.
-        if 'by' in self.book_name and self.entry_sentence.get():
+        if 'by' in self.book_name and question and self.entry_sentence.get():
             title, author = self.book_name.split(' by ')
             generated = open_ai.book_word_translation(title, author, self.current_sentence, question)
 
@@ -201,7 +203,7 @@ class FlashcardsInputDialog:
 
         self.entry_sentence_translation.delete(0, tk.END)
 
-        if 'by' in self.book_name:
+        if 'by' in self.book_name and question and self.current_sentence:
             title, author = self.book_name.rsplit(' by ', 1)
             self.current_sentence_translation = open_ai.book_sentence_translation(title, author, self.current_sentence,
                                                                                   question)

@@ -143,7 +143,8 @@ class LiviaApp:
         wpisów do słownika fiszek. Klasa FlashcardsInputDialog obsługuje proces wprowadzania i interakcji ze słownikiem.
         """
         if type(self.dictionary) is dict:
-            add_new_flashcards_window.FlashcardsInputDialog(self.master, self.dictionary, self.file_path)
+            add_new_flashcards_window.FlashcardsInputDialog(self.master, self.dictionary,
+                                                            self.file_path, book_name=self.book_name)
         else:
             messagebox.showinfo("Wrong type.", "Wrong flashcards type.")
 

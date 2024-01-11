@@ -8,7 +8,7 @@ import open_ai
 
 class AddSentence:
     def __init__(self, root, current_question_word: str, book_content, file_path: str, dictionary: dict,
-                 course_name: str, show_translated_sentence: int):
+                 founded_sentences, course_name: str, show_translated_sentence: int):
         """
         Klasa reprezentująca okno do wyszukiwania zdań w tekście zawierających dane słowo (question).
 
@@ -26,17 +26,15 @@ class AddSentence:
 
         self.current_word = current_question_word
         self.book_content = book_content
-        self.founded_sentences = []
-        self.length_search_sentences = None
+        self.founded_sentences = founded_sentences
+        self.length_search_sentences = len(self.founded_sentences)
         self.current_sentence = dictionary[self.current_word][1]
         self.translated_sentence = dictionary[self.current_word][2]
         self.show_translated_sentence = show_translated_sentence
 
-        # Wyszukiwanie zdań zawierających słowo kluczowe.
-        self.search_sentence()
-
         create_label(self.top, 'for "' + self.current_word + '" founded: ' + str(self.length_search_sentences), 'top')
-        create_button(self.top, 'Generate translation', self.generate_translation, 'pack', {'side': 'top'})
+        if self.show_translated_sentence:
+            create_button(self.top, 'Generate translation', self.generate_translation, 'pack', {'side': 'top'})
         self.original_sentence_label = create_label(self.top, '', 'Arial', 340, 'pack', {'side': 'top'})
         if self.show_translated_sentence:
             self.translate_label = create_label(self.top, self.translated_sentence, 'Arial', 340,
@@ -78,7 +76,6 @@ class AddSentence:
             self.next_button.config(state=tk.DISABLED)
 
         if self.length_search_sentences and self.length_search_sentences > self.current_index:
-
             # Szukanie miejsca w książce, w którym znajduje się zdanie (wyrażone w procentach).
             index = self.book_content.find(self.founded_sentences[self.current_index])
             percent = (index + 1) / (len(self.book_content) + 1) * 100
@@ -87,7 +84,7 @@ class AddSentence:
                 round(percent, 1)) + '%' + f'\t{self.current_index + 1}/{self.length_search_sentences}')
 
             # Zmiana koloru tekstu, jeżeli zdanie jest w fiszkach i wyświetlenie tłumaczenia zdania, jeżeli istnieje.
-            if (self.current_sentence in self.founded_sentences[self.current_index] or
+            if (self.current_sentence and self.current_sentence in self.founded_sentences[self.current_index] or
                     self.founded_sentences[self.current_index] in self.current_sentence):
                 self.original_sentence_label.config(fg="green")
                 if self.show_translated_sentence:

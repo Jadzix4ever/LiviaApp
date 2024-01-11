@@ -14,7 +14,7 @@ class CourseCreate:
         """
         self.top = tk.Toplevel(root)
 
-        ui.center_window(self.top, 300, 100)
+        ui.center_window(self.top, 400, 100)
 
         # Zmienna pomocnicza do uzyskania informacji, czy metoda create_file została wykonana do końca.
         self.done = False
@@ -23,7 +23,7 @@ class CourseCreate:
         self.courses = courses_list
 
         self.label = ui.create_label(self.top, 'Enter the course name:', 'Arial', None, 'pack', {'side': 'top'})
-        self.entry = ui.create_entry(self.top, 'top')
+        self.entry = ui.create_entry(self.top, 'top', width=40)
         self.button = ui.create_button(self.top, 'Create', self.create_file, 'pack', {'side': 'top'})
 
     def create_file(self):
