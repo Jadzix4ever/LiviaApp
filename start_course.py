@@ -9,12 +9,6 @@ import configuration
 import book_configuration
 
 
-# TODO: algorytm powtórek
-# TODO: baza danych mysql
-# TODO: wybór języków
-# TODO: installation guide
-# TODO: testing
-
 class CourseDialog:
     def __init__(self, root, dictionary: dict, file_path: str, course_name: str):
         """
