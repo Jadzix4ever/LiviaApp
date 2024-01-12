@@ -101,7 +101,7 @@ Każde słowo jest interaktywne i po jego kliknięciu wywoła się wypełnione o
 <img src="./images/icons/python.png" width="35" height="35" alt="Python"><span>&nbsp;&nbsp;&nbsp;</span>
 <img src="./images/icons/mysql.png" width="52" height="35" alt="git"><span>&nbsp;&nbsp;&nbsp;</span>
 <img src="./images/icons/openai.png" width="35" height="35" alt="openai"><span>&nbsp;&nbsp;&nbsp;</span>
-<img src="./images/icons/git.png" width="84" height="35" alt="git"><span>&nbsp;&nbsp;&nbsp;</span>
+<img src="./images/icons/Git.png" width="84" height="35" alt="git"><span>&nbsp;&nbsp;&nbsp;</span>
 <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/PyCharm_icon.png" alt="PyCharm logo." width="35" height="35">
 
 <br>
