@@ -12,7 +12,6 @@ class CourseCreate:
         :param courses_list: Lista kursów do sprawdzenia, czy plik o podanej nazwie już istnieje.
         """
         self.top = tk.Toplevel(root)
-
         ui.center_window(self.top, 400, 100)
 
         # Zmienna pomocnicza do uzyskania informacji, czy metoda create_file została wykonana do końca.

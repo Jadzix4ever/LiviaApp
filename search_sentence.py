@@ -90,10 +90,6 @@ class AddSentence:
                 if self.show_translated_sentence:
                     self.translate_label.config(text=self.translated_sentence)
 
-                # Wyłączenie przycisku 'save' jeżeli zdanie w fiszkach jest identyczne.
-                if self.current_sentence == self.founded_sentences[self.current_index]:
-                    self.save_button.config(state=tk.DISABLED)
-
             else:
                 self.original_sentence_label.config(fg="systemTextColor")
                 if self.show_translated_sentence:

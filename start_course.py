@@ -9,6 +9,12 @@ import configuration
 import book_configuration
 
 
+# TODO: algorytm powtórek
+# TODO: baza danych mysql
+# TODO: wybór języków
+# TODO: installation guide
+# TODO: testing
+
 class CourseDialog:
     def __init__(self, root, dictionary: dict, file_path: str, course_name: str):
         """
@@ -24,7 +30,8 @@ class CourseDialog:
         ui.center_window(self.top, 550, 400)
 
         self.dictionary = dictionary
-        self.question_word = random.choice(list(self.dictionary.keys()))    # Wylosowanie słowa z kluczy w słowniku.
+        self.copy_dictionary = dictionary.copy()   # Kopia do usuwania dobrych odpowiedzi podczas przepytywania.
+        self.question_word = random.choice(list(self.copy_dictionary.keys()))   # Wylosowanie słowa z kluczy w słowniku.
         self.show_translated_sentence = 0   # Liczba pomocnicza do wyświetlenia tłumaczenia zdania.
 
         frame_top = ui.create_frame(self.top, 'top')
@@ -49,8 +56,8 @@ class CourseDialog:
         self.course_name = course_name
 
         self.reverse_number = 1     # Zmienna kontrolująca tryb odwrócony
-        self.answer_word = self.dictionary[self.question_word][0]
-        self.sentence = self.dictionary[self.question_word][1]
+        self.answer_word = self.copy_dictionary[self.question_word][0]
+        self.sentence = self.copy_dictionary[self.question_word][1]
 
     def reverse(self):
         """
@@ -85,9 +92,9 @@ class CourseDialog:
         self.search_sentence_button.config(text='Search sentence', command=self.search_sentence)
 
         # Wylosowanie fiszki.
-        self.question_word = random.choice(list(self.dictionary.keys()))
-        self.answer_word = self.dictionary[self.question_word][0]
-        self.sentence = self.dictionary[self.question_word][1]
+        self.question_word = random.choice(list(self.copy_dictionary.keys()))
+        self.answer_word = self.copy_dictionary[self.question_word][0]
+        self.sentence = self.copy_dictionary[self.question_word][1]
 
         if self.reverse_number % 2 != 0:
             self.question_label.config(text=self.question_word, fg='systemTextColor')
@@ -154,8 +161,8 @@ class CourseDialog:
 
             if answer_correct:
                 self.question_label.config(text=self.question_word + '\n' + ', '.join(answer_correct), fg="green")
-                if len(self.dictionary) > 1:
-                    self.dictionary.pop(self.question_word)
+                if len(self.copy_dictionary) > 1:
+                    self.copy_dictionary.pop(self.question_word)
                 else:
                     messagebox.showinfo("THE END.", f"End of the flashcards.")
             self.answer_label.config(text=f"{self.answer_word}{'\n'} Sentence: {self.sentence}")
@@ -163,8 +170,8 @@ class CourseDialog:
         else:
             if answer_correct:
                 self.question_label.config(text=self.answer_word + '\n' + ', '.join(answer_correct), fg="green")
-                if len(self.dictionary) > 1:
-                    self.dictionary.pop(self.question_word)
+                if len(self.copy_dictionary) > 1:
+                    self.copy_dictionary.pop(self.question_word)
                 else:
                     messagebox.showinfo("THE END.", f"End of the flashcards.")
             self.answer_label.config(text=f"{self.question_word}{'\n'} Sentence: {self.sentence}")

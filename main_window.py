@@ -34,12 +34,12 @@ class LiviaApp:
         # Przypisanie fiszek do słownika.
         self.dictionary = configuration.import_flashcards_to_dictionary(self.file_path)
 
-        ui.create_button(self.master, "Create new course", self.create_new_course, 'place', {'x': 5, 'y': 5})
-        ui.create_button(self.master, "Import course", self.import_from_user_selection, 'place', {'x': 5, 'y': 35})
-        ui.create_button(self.master, "Import text from url", self.import_from_url, 'place', {'x': 5, 'y': 65})
-        ui.create_button(self.master, "Add new flashcards", self.new_word_input, 'place', {'x': 5, 'y': 95})
-        ui.create_button(self.master, "Start course", self.start_learning, 'place', {'x': 5, 'y': 125})
-        ui.create_button(self.master, "Start reading", self.start_reading, 'place', {'x': 5, 'y': 155})
+        ui.create_button(self.master, "Create New Course", self.create_new_course, 'place', {'x': 5, 'y': 5})
+        ui.create_button(self.master, "Import Course", self.import_from_user_selection, 'place', {'x': 5, 'y': 35})
+        ui.create_button(self.master, "Import Text from url", self.import_from_url, 'place', {'x': 5, 'y': 65})
+        ui.create_button(self.master, "Add New Flashcards", self.new_word_input, 'place', {'x': 5, 'y': 95})
+        ui.create_button(self.master, "Start Course", self.start_learning, 'place', {'x': 5, 'y': 125})
+        ui.create_button(self.master, "Start Reading", self.start_reading, 'place', {'x': 5, 'y': 155})
 
         # Stworzenie listbox do wyświetlenia listy wszystkich dostępnych kursów i do szybkiego wyboru kursu do nauki.
         self.listbox = ui.ListBox(self, self.courses_list)
