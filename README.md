@@ -1,4 +1,4 @@
-# <center>L I V I A</center>
+# <center>L<span>&nbsp;&nbsp;</span>I<span>&nbsp;&nbsp;</span>V<span>&nbsp;&nbsp;</span>I<span>&nbsp;&nbsp;</span>A</center>
 
 <br>
 
@@ -6,6 +6,7 @@
 This repository contains a GUI program designed for language learning through reading imported text files. The program 
 enables users to create flashcards during reading, with automatically generated sentences and translations using the 
 OpenAI.
+
 <sub>*Currently, the program is ready for Polish speakers to learn English.</sub>
 
 ## Why?
@@ -16,7 +17,7 @@ downloaded for free from gutenberg.org.
 
 ## How does it work?
 LIVIA uses the OpenAI tool to help with translations. It shows translations in a way that makes sense for the chosen 
-phrase. It translates sentences in a style that matches the writing style of the author
+phrase. It translates sentences in a style that matches the writing style of the author.
 
 ## Main program window.
 In the main window of the program, there is a list on the right side containing several default courses ready for 
@@ -24,7 +25,7 @@ learning. In the course "The War of the Worlds by H. G. Wells," there are over 1
 include either prepared books for reading or, as in the case of Norwegian language courses, only flashcards without 
 texts. You can choose a course from the list for learning. At the bottom of the window, there is a label displaying 
 the path of the currently opened course.
-<img src="./images/Main_window.png" alt="main window screenshot" width="500" height="400">
+![main window screenshot](./images/Main_window.png){:width="40px" height="300px"}
 
 ###### Buttons:
 - "Create new course" - Opens a window to create a new course with an empty flashcard list.
@@ -36,7 +37,7 @@ a course.
 - "Start reading" - Opens a window for reading text and adding words to flashcards.
 
 ## Create New Course.
-<img src="./images/Create_new_course_window.png" alt="main window screenshot" width="350" height="400">
+![create new course window screenshot](./images/Create_new_course_window.png)
 While creating a new course in the "Create New Course" window, it's important to ensure that the file name follows 
 the pattern in English: '{book title} by {author}' (as shown in the picture). This ensures the most accurate 
 generation of translations.
