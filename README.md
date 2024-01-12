@@ -25,7 +25,7 @@ learning. In the course "The War of the Worlds by H. G. Wells," there are over 1
 include either prepared books for reading or, as in the case of Norwegian language courses, only flashcards without 
 texts. You can choose a course from the list for learning. At the bottom of the window, there is a label displaying 
 the path of the currently opened course.
-![main window screenshot](./images/Main_window.png){:width="40px" height="300px"}
+![main window screenshot](./images/Main_window.png)
 
 ###### Buttons:
 - "Create new course" - Opens a window to create a new course with an empty flashcard list.
