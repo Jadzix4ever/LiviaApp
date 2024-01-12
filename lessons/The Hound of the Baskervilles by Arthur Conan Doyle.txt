@@ -1,0 +1,11 @@
+###LiviaApp###
+hearth-rug : dywan kominkowy : I stood upon the hearth-rug and picked up the stick which our visitor had left behind him the night before. : 
+stick : kij, patyk, laska : I stood upon the hearth-rug and picked up the stick which our visitor had left behind him the night before. : 
+infrequent : rzadki, nieczęsty, sporadyczny : Sherlock Holmes, who was usually very late in the mornings, save upon those not infrequent occasions when he was up all night, was seated at the breakfast table. : 
+behind : za, z tyłu, za sobą : I stood upon the hearth-rug and picked up the stick which our visitor had left behind him the night before. : Stałem na dywanie przed kominkiem i podniosłem kij, który nasz gość zostawił za sobą poprzedniej nocy.
+bulbous-headed : kulistogłowy : It was a fine, thick piece of wood, bulbous-headed, of the sort which is known as a “Penang lawyer.” : Był to piękny, gruby kawałek drewna, o bulwiastym kształcie główki, takiego rodzaju, który jest znany jako "Penang lawyer".
+band : opaska, zespół, taśma : It was a fine, thick piece of wood, bulbous-headed, of the sort which is known as a “Penang lawyer.” Just under the head was a broad silver band nearly an inch across. : Tuż pod głową znajdował się szeroki srebrny pasek o szerokości prawie cala.
+carry—dignified : nosić—godny, nosić—dostojny, nosić—wzruszający : It was just such a stick as the old-fashioned family practitioner used to carry—dignified, solid, and reassuring. : 
+solid : solidny, trwały, mocny : It was just such a stick as the old-fashioned family practitioner used to carry—dignified, solid, and reassuring. : 
+reassuring : uspokajający, uspokajające : “To James Mortimer, M.R.C.S., from his friends of the C.C.H.,” was engraved upon it, with the date “1884.” It was just such a stick as the old-fashioned family practitioner used to carry—dignified, solid, and reassuring. : "Na Jamesa Mortimera, M.R.C.S., od jego przyjaciół z C.C.H." było wygrawerowane na nim, wraz z datą "1884". To był dokładnie taki kij, jakim dawniej posługiwał się staromodny lekarz rodzinny - dostojny, solidny i uspokajający.
+occupation : zajęcie, zawód, praca : “Well, Watson, what do you make of it?” Holmes was sitting with his back to me, and I had given him no sign of my occupation. : 
