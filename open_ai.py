@@ -2,7 +2,7 @@ from openai import OpenAI
 
 
 def your_api_key():
-    with open('config/Your_API_KEY.txt', 'r') as file:
+    with open('config/My_API_KEY.txt', 'r') as file:
         api_key = file.readline()
     return api_key
 

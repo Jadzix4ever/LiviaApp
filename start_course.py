@@ -69,6 +69,8 @@ class CourseDialog:
         """
         Wyświetla kolejne pytanie i przywraca domyślne ustawienia.
         """
+        self.next_button.config(text='Next')
+
         try:
             self.play_sentence_button.destroy()
         except AttributeError:
@@ -152,11 +154,19 @@ class CourseDialog:
 
             if answer_correct:
                 self.question_label.config(text=self.question_word + '\n' + ', '.join(answer_correct), fg="green")
+                if len(self.dictionary) > 1:
+                    self.dictionary.pop(self.question_word)
+                else:
+                    messagebox.showinfo("THE END.", f"End of the flashcards.")
             self.answer_label.config(text=f"{self.answer_word}{'\n'} Sentence: {self.sentence}")
 
         else:
             if answer_correct:
                 self.question_label.config(text=self.answer_word + '\n' + ', '.join(answer_correct), fg="green")
+                if len(self.dictionary) > 1:
+                    self.dictionary.pop(self.question_word)
+                else:
+                    messagebox.showinfo("THE END.", f"End of the flashcards.")
             self.answer_label.config(text=f"{self.question_word}{'\n'} Sentence: {self.sentence}")
 
         if self.sentence:

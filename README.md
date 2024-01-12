@@ -7,6 +7,8 @@ W tym repozytorium jest program GUI, który służy do nauki języka poprzez czy
 tekstowych. W programie jest możliwość dodawania fiszek do kursów w trakcie czytania wraz z automatycznie dodawanymi 
 zdaniami i tłumaczeniami generowanymi za pomocą klucza API OpenAI.
 
+<sub>*Program na razie służy tylko do nauki języka angielskiego dla osób mówiących w języku polskim.</sub>
+
 
 ## Why?
 Korzystając z programu, można uczyć się języka w bardzo praktyczny sposób. Czytając tekst, widzimy od razu, w jakim 
@@ -74,6 +76,10 @@ w kolejności losowej.
 - "Repetitions" - Dodaj słowo do powtórek (jeszcze nieobsługiwane).
 - "Play" - Odsłuchanie wymowy zdania.
 
+<sub>*Jeszcze nie można dodawać słów do powtórek. Z tego powodu zalecam zaimportowanie pliku z programu LIVIA do 
+popularnego programu do nauki z fiszek "Anki". Pliki z fiszkami są tworzone w formie kompatybilnej z obsługą w "Anki" 
+(kompatybilność działa w dwie strony, można także wygenerować plik z Anki i zaimportować go do programu LIVIA).</sub>
+
 ## Okno "Search sentence".
 ![search sentence window screenshot](./images/Search_sentence_window.png)
 Okno "Search sentence" służy do wyszukiwania zdań do aktualnej fiszki. Wyszukiwanie jest dostępne tylko w przypadku 
@@ -84,17 +90,30 @@ zostało znalezione i jest już dodane do fiszek, to wyświetla się ono w kolor
 ## Okno "Reading".
 ![reading window screenshot](./images/Reading_window.png)
 W tym oknie możemy przeglądać tekst do danego kursu. Stronę można zmienić za pomocą suwaka lub za pomocą przycisków. 
-Każde słowo jest interaktywne i po jego kliknięciu wywoła się wypełnione okno dodawania słówek do fiszek. 
+Każde słowo jest interaktywne i po jego kliknięciu wywoła się wypełnione okno dodawania słówek do fiszek.
+
+<sub>*Aby opcja tłumaczenia była aktywna, należy skopiować swój klucz OpenAI do 'Your_API_KEY.txt' w folderze config.</sub>
+
+<br>
+
+### Technologies:
+
+<img src="./images/icons/python.png" width="35" height="35" alt="Python"><span>&nbsp;&nbsp;&nbsp;</span>
+<img src="./images/icons/mysql.png" width="52" height="35" alt="git"><span>&nbsp;&nbsp;&nbsp;</span>
+<img src="./images/icons/openai.png" width="35" height="35" alt="openai"><span>&nbsp;&nbsp;&nbsp;</span>
+<img src="./images/icons/git.png" width="84" height="35" alt="git"><span>&nbsp;&nbsp;&nbsp;</span>
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/PyCharm_icon.png" alt="PyCharm logo." width="35" height="35">
+
+<br>
+
+### ToDo:
+- algorytm powtórek
+- baza danych mysql
+- wybór języków
+- installation guide
+- testing
 
 
 
-*Aby opcja tłumaczenia była aktywna, należy stworzyć plik 'Your_API_KEY.txt' w folderze config i w środku umieścić klucz.
-
-
-UWAGA!
-
-Chociaż funkcja przepytywania jest już dostępna, to jeszcze nie można dodawać słów do powtórek. Z tego powodu zalecam 
-zaimportowanie pliku z programu LIVIA do popularnego programu do obsługi fiszek "Anki" i w nim kontynuować naukę. 
-Pliki z fiszkami są tworzone w formie kompatybilnej z obsługą w "Anki" (kompatybilność działa w dwie strony, można
-także wygenerować plik z Anki i zaimportować go do programu LIVIA). Program na razie służy tylko do nauki języka
-angielskiego dla osób mówiących w języku polskim. 
+Contact
+Created by lteresak@yahoo.com - Don't hesitate to contact me!
