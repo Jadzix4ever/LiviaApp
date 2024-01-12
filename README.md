@@ -36,7 +36,7 @@ a course.
 - "Start reading" - Opens a window for reading text and adding words to flashcards.
 
 ## Create New Course.
-![create new course window screenshot](./images/Create_new_course_window.png)
+<img src="./images/Create_new_course_window.png" alt="main window screenshot" width="350" height="400">
 While creating a new course in the "Create New Course" window, it's important to ensure that the file name follows 
 the pattern in English: '{book title} by {author}' (as shown in the picture). This ensures the most accurate 
 generation of translations.
@@ -105,4 +105,3 @@ the slider or the buttons. Each word is clickable, triggering a pop-up window fo
 ---
 ### Contact:
 Created by lteresak@yahoo.com - Don't hesitate to contact me!
-Three or more...
