@@ -41,19 +41,19 @@ class FlashcardsInputDialog:
         if pairs:   # Warunek konieczny do uniknięcia błędu podczas dodawania słów z okna głównego.
             self.page_sentences = remove_duplicate_elements(pairs)
         self.book_name = book_name
-        ui.center_window(self.top, 900, 350)
+        ui.center_window(self.top, 500, 550)
 
         ui.create_label(self.top, 'Question:', 'Arial', None, 'pack', {'side': 'top'})
-        self.entry_question = ui.create_entry(self.top, 'top', question)
+        self.entry_question = ui.create_entry(self.top, 'top', question, 35)
         ui.create_label(self.top, 'Answer:', 'Arial', None, 'pack', {'side': 'top'})
         ui.create_button(self.top, 'Auto translation', self.word_translation, 'pack', {'side': 'top'})
         self.entry_answer = ui.create_entry(self.top, 'top', '', 35)
         ui.create_label(self.top, 'Sentence:', 'Arial', None, 'pack', {'side': 'top'})
-        self.entry_sentence = ui.create_entry(self.top, 'top', sentence, 95)
+        self.text_sentence = ui.create_text(self.top, 'top', sentence)
         ui.create_label(self.top, 'Sentence translation:', 'Arial', None, 'pack', {'side': 'top'})
         if pairs:
             ui.create_button(self.top, 'Auto translation', self.sentence_translation, 'pack', {'side': 'top'})
-        self.entry_sentence_translation = ui.create_entry(self.top, 'top', '', 95)
+        self.text_sentence_translation = ui.create_text(self.top, 'top', '')
         self.ok_button = ui.create_button(self.top, 'OK', self.new_word_input, 'pack', {'side': 'bottom'})
         frame = ui.create_frame(self.top, 'bottom')
         if pairs:
@@ -62,8 +62,8 @@ class FlashcardsInputDialog:
 
         self.dictionary = dictionary    # Przypisanie słownika do zmiennej do wprowadzania i zapisywania zmian.
         self.file_path = file_path      # Przypisanie ścieżki z plikiem do zmiennej do funkcji zapisywania zmian.
-        self.current_sentence = self.entry_sentence.get()   # Przypisanie przesłanego zdania do zmiennej.
-        self.current_sentence_translation = self.entry_sentence_translation.get()
+        self.current_sentence = sentence   # Przypisanie przesłanego zdania do zmiennej.
+        self.current_sentence_translation = self.text_sentence_translation.get("1.0", tk.END).strip()
 
         # Sprawdzenie, czy słowo już istnieje w słowniku:
         if self.dictionary and self.entry_question.get() in self.dictionary:
@@ -127,8 +127,8 @@ class FlashcardsInputDialog:
         except IndexError:
             print('IndexError: list index out of range.')
 
-        self.entry_sentence.delete(0, tk.END)
-        self.entry_sentence.insert(0, self.current_sentence)
+        self.text_sentence.delete(1.0, tk.END)
+        self.text_sentence.insert(1.0, self.current_sentence)
 
     def add_text_to_left_side(self):
         """
@@ -144,8 +144,8 @@ class FlashcardsInputDialog:
         except IndexError:
             print('IndexError: list index out of range.')
 
-        self.entry_sentence.delete(0, tk.END)
-        self.entry_sentence.insert(0, self.current_sentence)
+        self.text_sentence.delete(1.0, tk.END)
+        self.text_sentence.insert(1.0, self.current_sentence)
 
     def word_translation(self):
         """
@@ -156,7 +156,7 @@ class FlashcardsInputDialog:
 
         # Sprawdzenie, czy kurs pochodzi z książki (tłumaczenia z książek są dokładniejsze)
         # i czy jest wprowadzone zdanie.
-        if 'by' in self.book_name and question and self.entry_sentence.get():
+        if 'by' in self.book_name and question and self.text_sentence.get("1.0", tk.END).strip():
             title, author = self.book_name.split(' by ')
             generated = open_ai.book_word_translation(title, author, self.current_sentence, question)
 
@@ -201,13 +201,13 @@ class FlashcardsInputDialog:
         if not self.entry_question.get():
             return
 
-        self.entry_sentence_translation.delete(0, tk.END)
+        self.text_sentence_translation.delete(1.0, tk.END)
 
         if 'by' in self.book_name and question and self.current_sentence:
             title, author = self.book_name.rsplit(' by ', 1)
             self.current_sentence_translation = open_ai.book_sentence_translation(title, author, self.current_sentence,
                                                                                   question)
-            self.entry_sentence_translation.insert(0, self.current_sentence_translation)
+            self.text_sentence_translation.insert(1.0, self.current_sentence_translation)
 
         else:
             self.standard_sentence_translation(self.current_sentence)
@@ -221,8 +221,8 @@ class FlashcardsInputDialog:
         Aktualizuje słownik i zapisuje go do pliku.
         """
         # Zaktualizowanie zmiennych.
-        self.current_sentence = self.entry_sentence.get()
-        self.current_sentence_translation = self.entry_sentence_translation.get()
+        self.current_sentence = self.text_sentence.get("1.0", tk.END).strip()
+        self.current_sentence_translation = self.text_sentence_translation.get("1.0", tk.END).strip()
 
         # Utworzenie nowej listy dla aktualnego słowa.
         current_value = []
@@ -238,5 +238,5 @@ class FlashcardsInputDialog:
 
         self.entry_question.delete(0, tk.END)
         self.entry_answer.delete(0, tk.END)
-        self.entry_sentence.delete(0, tk.END)
-        self.entry_sentence_translation.delete(0, tk.END)
+        self.text_sentence.delete(1.0, tk.END)
+        self.text_sentence_translation.delete(1.0, tk.END)

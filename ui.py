@@ -73,6 +73,13 @@ def create_entry(root, side, text: str = '', width: int = 20):
     return entry
 
 
+def create_text(root, side, text: str = '', width=45, height=10):
+    text_widget = tk.Text(root, width=width, height=height)
+    text_widget.insert(1.0, text)
+    text_widget.pack(side=side)
+    return text_widget
+
+
 def get_label_dimensions(label) -> tuple:
     """
     :param label: Obiekt etykiety.
