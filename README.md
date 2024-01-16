@@ -1,6 +1,6 @@
 # <center>L<span>&nbsp;&nbsp;</span>I<span>&nbsp;&nbsp;</span>V<span>&nbsp;&nbsp;</span>I<span>&nbsp;&nbsp;</span>A</center>
 
-<br>
+<br> 
 
 ## What is LIVIA?
 This repository contains a GUI program designed for language learning through reading imported text files. The program 
