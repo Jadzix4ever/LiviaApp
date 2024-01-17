@@ -104,6 +104,7 @@ class CourseDialog:
         """
         if self.book_content:
             book_content = ' '.join(self.book_content)
+            print(book_content)
             # Wyszukiwanie zdań zawierających słowo kluczowe.
             founded_sentences = configuration.search_sentence(book_content, self.question_word)
 

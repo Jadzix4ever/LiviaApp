@@ -198,10 +198,4 @@ def search_sentence(book_content: str, current_word: str) -> list:
 
     founded_sentences = [sentence.strip() for sentence in sentences if current_word.lower() in sentence.lower()]
 
-    # Usunięcie dodatkowych spacji, które mogły powstać po podziale na zdania.
-    for i in range(len(founded_sentences)):
-        sentence = founded_sentences[i]
-        sentence = sentence.replace('  ', ' ')
-        founded_sentences[i] = sentence
-
     return founded_sentences

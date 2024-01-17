@@ -79,7 +79,8 @@ class AddSentence:
             # Szukanie miejsca w książce, w którym znajduje się zdanie (wyrażone w procentach).
             index = self.book_content.find(self.founded_sentences[self.current_index])
             percent = (index + 1) / (len(self.book_content) + 1) * 100
-
+            # Usunięcie dodatkowych spacji, które mogły powstać po podziale na zdania.
+            self.founded_sentences[self.current_index] = self.founded_sentences[self.current_index].replace('  ', ' ')
             self.original_sentence_label.config(text=str(self.founded_sentences[self.current_index]) + '\n\n' + str(
                 round(percent, 1)) + '%' + f'\t{self.current_index + 1}/{self.length_search_sentences}')
 
@@ -87,6 +88,7 @@ class AddSentence:
             if (self.current_sentence and self.current_sentence in self.founded_sentences[self.current_index] or
                     self.founded_sentences[self.current_index] in self.current_sentence):
                 self.original_sentence_label.config(fg="green")
+
                 if self.show_translated_sentence:
                     self.translate_label.config(text=self.translated_sentence)
 
