@@ -55,9 +55,7 @@ with. If you wish to manually customize the text, you can edit the .txt file and
 ## Add new flashcards.
 ![add new flashcards window screenshot](./images/Add_new_flashcards_window.png)
 In the "Add New Flashcards" window, you can add new words and sentences to flashcards. Please note that sentence 
-translation does not work in this window; translation of words is only possible when a sentence is entered. Translations 
-for regular texts are not yet available, so using this window for generating translations is not recommended, and 
-sentence translation is not supported.
+translation does not work in this window and translation of words is possible only when a sentence is entered.
 
 ## Start course.
 ![start course window screenshot](./images/Start_course_window.png)

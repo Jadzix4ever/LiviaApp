@@ -149,7 +149,7 @@ class FlashcardsInputDialog:
 
     def word_translation(self):
         """
-        Tłumaczy słowa z wykorzystaniem AI za pomocą OpenAPI_Key
+        Tłumaczy słowa pochodzące z książek z wykorzystaniem AI za pomocą OpenAPI_Key
         """
         question = self.entry_question.get()
         self.entry_answer.delete(0, tk.END)
@@ -189,12 +189,33 @@ class FlashcardsInputDialog:
             self.standard_word_translation(question)
 
     def standard_word_translation(self, question: str):
-        # W trakcie tworzenia.
-        pass
+        """
+        Tłumaczy słowa z wykorzystaniem AI za pomocą OpenAPI_Key
+        """
+        generated = open_ai.article_word_translation(self.current_sentence, question)
+        if ':' in generated:
+            generated = generated.split(':')
+            question = generated[0].strip()
+            answer = generated[1].strip()
+
+            self.entry_question.delete(0, tk.END)
+            self.entry_question.insert(0, question)
+
+            question = self.entry_question.get()
+
+            if question in self.dictionary:
+                self.ok_button.config(text='Edit', command=self.edit_dictionary)
+                self.entry_question.config(state="readonly")
+
+            self.entry_answer.insert(0, answer)
+
+        else:
+            answer = generated
+            self.entry_answer.insert(0, answer)
 
     def sentence_translation(self):
         """
-        Tłumaczy zdania z wykorzystaniem AI za pomocą OpenAPI_Key
+        Tłumaczy zdania pochodzące z książek z wykorzystaniem AI za pomocą OpenAPI_Key
         """
         question = self.entry_question.get()
 
@@ -210,11 +231,14 @@ class FlashcardsInputDialog:
             self.text_sentence_translation.insert(1.0, self.current_sentence_translation)
 
         else:
-            self.standard_sentence_translation(self.current_sentence)
+            self.standard_sentence_translation(question)
 
-    def standard_sentence_translation(self, sentence: str):
-        # W trakcie tworzenia.
-        pass
+    def standard_sentence_translation(self, question):
+        """
+        Tłumaczy zdania z wykorzystaniem AI za pomocą OpenAPI_Key
+        """
+        self.current_sentence_translation = open_ai.article_sentence_translation(self.current_sentence, question)
+        self.text_sentence_translation.insert(1.0, self.current_sentence_translation)
 
     def update_dictionary(self, question: str, answer: str):
         """

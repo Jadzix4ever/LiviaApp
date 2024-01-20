@@ -87,10 +87,11 @@ def article_word_translation(sentence, word, language_in_progress_of_learning='E
           "content": f"You are a translator of {language_in_progress_of_learning} and {language}. You translate "
                      f"the received word in accordance with the context in sentence: \"{sentence}\""
                      "\n###\n"
-                     f"If \"{word}\" is not in its base form, use lemmatization."
+                     f"If \"{word}\" is not in its base form, use lemmatization and transform it into the base form."
                      f"Pay attention to the sentence: \"{sentence}\""
                      f"Provide a maximum of 3 translation suggestions. "
-                     f"Display the translation in the following pattern: \"lemmatizated word: translated word\""
+                     f"Display the translation in the following pattern: \"{word}: translated word, translated word\""
+                     f"Pay attention to the pattern! Your answer must be in a very restricted form."
         },
         {
           "role": "user",
@@ -138,4 +139,3 @@ def article_sentence_translation(sentence, word, language_in_progress_of_learnin
     )
 
     return response.choices[0].message.content
-    pass
